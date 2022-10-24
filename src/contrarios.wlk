@@ -22,12 +22,7 @@ class Contrario {
 	var property position = game.at((0 .. 4).anyOne(), 19)
 
 	method avanzar() {
-		
 		position = position.down(1)
-		if(position.y() > game.height() ){
-			game.removeVisual(self)
-			contrarios.todos().remove(self)
-		}
 	}
 
 }
