@@ -19,10 +19,10 @@ object contrarios {
 class Contrario {
 
 	var property image = "aleman.png"
-	var property position = game.at((0 .. 4).anyOne(), 19)
+	var property position = game.at(19, (0 .. 4).anyOne())
 
 	method avanzar() {
-		position = position.down(1)
+		position = position.left(1)
 	}
 
 }
