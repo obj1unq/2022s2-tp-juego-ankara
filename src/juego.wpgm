@@ -2,6 +2,7 @@ import wollok.game.*
 import objetos.*
 import contrarios.*
 import consumibles.*
+import interfaz.*
 
 program futbolito{
 	game.addVisual(lionel)
@@ -9,10 +10,14 @@ program futbolito{
 	game.width(20)
 	game.height(5)
 	game.addVisual(pelota)
+	game.addVisual(visorEnergia)
+	game.addVisual(visorPelotas)
 		// Movimientos de Lionel
 	keyboard.up().onPressDo({ lionel.subir() })
 	keyboard.down().onPressDo({ lionel.bajar() })
 	keyboard.p().onPressDo({ lionel.patear() })
+		// Coliders
+	game.onCollideDo(lionel, { cosa => cosa.colisioneCon(lionel) })
 		// On ticks
 	game.onTick(400, "CONTRARIOS", { contrarios.agregarNuevo() })
 	game.onTick(175, "CONTRARIOS", { contrarios.avanzarTodos() })
