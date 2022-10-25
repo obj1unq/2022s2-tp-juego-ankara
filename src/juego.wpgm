@@ -4,31 +4,21 @@ import contrarios.*
 import consumibles.*
 
 program futbolito{
-
 	game.addVisual(lionel)
 	game.cellSize(70)
 	game.width(20)
 	game.height(5)
-	game.addVisual( pelota)
-	game.addVisualCharacter(lionel)
-
-	// Movimientos de Lionel
+	game.addVisual(pelota)
+		// Movimientos de Lionel
 	keyboard.up().onPressDo({ lionel.subir() })
 	keyboard.down().onPressDo({ lionel.bajar() })
-
-
-	keyboard.enter().onPressDo({ game.say(lionel, "Vamos Argentina") })
 	keyboard.p().onPressDo({ lionel.patear() })
-
+		// On ticks
 	game.onTick(400, "CONTRARIOS", { contrarios.agregarNuevo() })
 	game.onTick(175, "CONTRARIOS", { contrarios.avanzarTodos() })
-	
 	game.onTick(3000, "BOTELLAS", { botellas.agregarNuevo() })
 	game.onTick(100, "BOTELLAS", { botellas.avanzarTodos() })
-
 	game.onTick(5000, "BOLSAS", { bolsas.agregarNuevo() })
 	game.onTick(100, "BOLSAS", { bolsas.avanzarTodos() })
-	
 	game.start()
 }
-
