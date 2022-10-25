@@ -7,7 +7,8 @@ program futbolito{
 	game.cellSize(70)
 	game.width(20)
 	game.height(5)
-
+	
+	game.addVisual( pelota)
 	game.addVisualCharacter(lionel)
 
 	keyboard.enter().onPressDo({ game.say(lionel, "Vamos Argentina") })
