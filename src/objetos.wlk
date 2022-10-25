@@ -22,6 +22,7 @@ object pelota {
 	var property position = game.at(1, 2)
 
 	method pateada() {
+		self.validarPosition()
 		self.moverLaPelota_VecesALaDerecha(1)
 		game.onTick(19, "pelotaEnMovimiento", { self.moverLaPelota_VecesALaDerechaSiHayVisualYNoHayObstruccion(1)})
 	}
@@ -48,6 +49,12 @@ object pelota {
 
 	method hayObstruccion() {
 		return not game.colliders(self).isEmpty()
+	}
+
+	method validarPosition() {
+		if (not ( self.position() == lionel.position() )) {
+			self.error("la pelota no está en la misma posicion de lionel")
+		}
 	}
 
 }
