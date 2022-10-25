@@ -1,6 +1,7 @@
 import wollok.game.*
 import objetos.*
 import contrarios.*
+import consumibles.*
 
 program futbolito{
 
@@ -18,7 +19,13 @@ program futbolito{
 
 	game.onTick(400, "CONTRARIOS", { contrarios.agregarNuevo() })
 	game.onTick(175, "CONTRARIOS", { contrarios.avanzarTodos() })
+	
+	game.onTick(3000, "BOTELLAS", { botellas.agregarNuevo() })
+	game.onTick(100, "BOTELLAS", { botellas.avanzarTodos() })
 
+	game.onTick(5000, "BOLSAS", { bolsas.agregarNuevo() })
+	game.onTick(100, "BOLSAS", { bolsas.avanzarTodos() })
+	
 	game.start()
 }
 
