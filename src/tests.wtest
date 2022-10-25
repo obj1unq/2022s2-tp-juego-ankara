@@ -1,6 +1,17 @@
+import objetos.*
+import contrarios.*
+import wollok.game.*
 
-test "testX" {
 
-	assert.that(true)
+test "Valido si lionel no se va de los extremos" {
+
+	
+	lionel.position(game.at(2, 4))
+	lionel.subir()
+	assert.that(game.at(2, 4) == lionel.position())
+	lionel.position(game.at(2, 0))
+	lionel.bajar()
+	assert.that(game.at(2, 0) == lionel.position())
+	
 
 }

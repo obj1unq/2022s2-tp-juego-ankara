@@ -4,11 +4,14 @@ import contrarios.*
 
 program futbolito{
 
+	game.addVisual(lionel)
 	game.cellSize(70)
 	game.width(20)
 	game.height(5)
 
-	game.addVisualCharacter(lionel)
+	// Movimientos de Lionel
+	keyboard.up().onPressDo({ lionel.subir() })
+	keyboard.down().onPressDo({ lionel.bajar() })
 
 	keyboard.enter().onPressDo({ game.say(lionel, "Vamos Argentina") })
 	keyboard.p().onPressDo({ lionel.patear() })
