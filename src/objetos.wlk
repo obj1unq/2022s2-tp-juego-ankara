@@ -59,6 +59,10 @@ object lionel {
 	method serGolpeadoPor(contrario) {
 		energia = energia - contrario.ataque()
 	}
+	
+	method colisioneCon(character){
+		// No hace nada.
+	}
 
 }
 
@@ -103,8 +107,24 @@ object pelota {
 		// Para que no se rompa cuando colisionan lionel y pelota.
 	}
 	
+	method serGolpeadoPor(contrario){
+		if (position != lionel.position()){
+			game.removeVisual(contrario)
+		}
+		
+	}
+	
+	method recibirEnergia(botella) {
+		// No hace nada
+	}
+
+	method recargarPelotas(bolsaDePelotas) {
+		// No hace nada
+	}
+	
 	// TODO: Descontar pelotas cada vez que la pateamos
 	// TODO: Hacer que desaparezca la pelota cuando colisiona con un elemento.
+	// TODO: Pelota tiene que ser una clase y que se vayan creando objetos a medida que patea.
 	
 	
 

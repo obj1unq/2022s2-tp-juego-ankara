@@ -18,6 +18,7 @@ program futbolito{
 	keyboard.p().onPressDo({ lionel.patear() })
 		// Coliders
 	game.onCollideDo(lionel, { cosa => cosa.colisioneCon(lionel) })
+	game.onCollideDo(pelota, { cosa => cosa.colisioneCon(pelota) })
 		// On ticks
 	game.onTick(400, "CONTRARIOS", { contrarios.agregarNuevo() })
 	game.onTick(175, "CONTRARIOS", { contrarios.avanzarTodos() })
