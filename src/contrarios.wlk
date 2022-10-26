@@ -1,12 +1,10 @@
 import wollok.game.*
 
 object contrarios {
-	const property todos = #{}
-
+	
 	method agregarNuevo() {
 		const nuevo = new Contrario()
 		game.addVisual(nuevo)
-		todos.add(nuevo)
 	}
 
 	method avanzarTodos() {
@@ -21,6 +19,10 @@ class Contrario {
 	var property position = game.at(19, (0 .. 4).anyOne())
 	const property ataque = 2
 
+	method unTick(){
+		self.avanzar()
+	}
+	
 	method avanzar() {
 		position = position.left(1)
 	}

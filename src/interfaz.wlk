@@ -1,5 +1,6 @@
 import wollok.game.*
 import objetos.*
+import contrarios.*
 
 object visorEnergia {
 
@@ -15,9 +16,10 @@ object visorEnergia {
 		return "000000"
 	}
 	
-	method colisioneCon(character) {
-		//Polimorfismo.
+	method unTick(){
+		contrarios.agregarNuevo()
 	}
+
 
 }
 
@@ -35,8 +37,8 @@ object visorPelotas {
 		return "000000"
 	}
 
-	method colisioneCon(character) {
-		//Polimorfismo.
+	method unTick(){
+		
 	}
 	
 }

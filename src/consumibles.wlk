@@ -3,7 +3,7 @@ import wollok.game.*
 object gatoredes {
 
 	method agregarNuevo() {
-		const nuevo = new Botella()
+		const nuevo = new Gatorade()
 		game.addVisual(nuevo)
 	}
 

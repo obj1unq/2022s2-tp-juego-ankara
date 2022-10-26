@@ -4,23 +4,26 @@ import contrarios.*
 import consumibles.*
 import interfaz.*
 
+const c = game.allVisuals()
+
 program futbolito{
-	game.addVisual(lionel)
 	game.cellSize(70)
 	game.width(20)
 	game.height(5)
-	game.addVisual(pelota)
+	
+	game.addVisual(lionel)
+	
 	game.addVisual(visorEnergia)
 	game.addVisual(visorPelotas)
 		// Movimientos de Lionel
 	keyboard.up().onPressDo({ lionel.subir() })
 	keyboard.down().onPressDo({ lionel.bajar() })
-	keyboard.p().onPressDo({ lionel.patear() })
-		// Coliders
+	//keyboard.p().onPressDo({ lionel.patearPelota() })
+		// Colliders
 	//game.onCollideDo(lionel, { cosa => cosa.colisioneCon(lionel) })
 	//game.onCollideDo(pelota, { cosa => cosa.colisioneCon(pelota) })
 		// On ticks
-	game.onTick(1000, "un_tick", { game.allVisuals().unTick() })
+	game.onTick(1500, "un_tick", { c.forEach{ c => c.unTick() } }
 
 	game.start()
 }
