@@ -1,30 +1,19 @@
 import wollok.game.*
 
-object botellas {
-
-	const property todos = #{}
+object gatoredes {
 
 	method agregarNuevo() {
 		const nuevo = new Botella()
 		game.addVisual(nuevo)
-		todos.add(nuevo)
-	}
-
-	method avanzarTodos() {
-		todos.forEach({ botella => botella.avanzar()})
 	}
 
 }
 
-class Botella {
+class Gatorade {
 
 	var property image = "gatorade.png"
 	var property position = game.at(19, (0 .. 4).anyOne())
-	const energia = 4
-
-	method energia() {
-		return energia
-	}
+	const property energia = 4
 
 	method avanzar() {
 		position = position.left(1)
@@ -36,36 +25,24 @@ class Botella {
 
 	method serConsumida() {
 		game.removeVisual(self)
-		botellas.todos().remove(self)
 	}
 
 }
 
-object bolsas {
-
-	const property todos = #{}
+object bolsasDePelotas {
 
 	method agregarNuevo() {
 		const nuevo = new Bolsa()
 		game.addVisual(nuevo)
-		todos.add(nuevo)
-	}
-
-	method avanzarTodos() {
-		todos.forEach({ bolsa => bolsa.avanzar()})
 	}
 
 }
 
-class Bolsa {
+class BolsaDePelotas {
 
 	var property image = "bolsaPelotas.jpg"
 	var property position = game.at(19, (0 .. 4).anyOne())
-	const cantidad = 5
-
-	method cantidad() {
-		return cantidad
-	}
+	const property cantidad = 5
 
 	method avanzar() {
 		position = position.left(1)
@@ -77,7 +54,6 @@ class Bolsa {
 
 	method serConsumida() {
 		game.removeVisual(self)
-		bolsas.todos().remove(self)
 	}
 
 }

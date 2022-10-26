@@ -1,7 +1,6 @@
 import wollok.game.*
 
 object contrarios {
-
 	const property todos = #{}
 
 	method agregarNuevo() {
@@ -20,18 +19,13 @@ class Contrario {
 
 	var property image = "aleman.png"
 	var property position = game.at(19, (0 .. 4).anyOne())
-	const ataque = 2
-
-	method ataque() {
-		return ataque
-	}
+	const property ataque = 2
 
 	method avanzar() {
 		position = position.left(1)
 	}
 
 	method colisioneCon(character) {
-		character.serGolpeadoPor(self)
 	}
 
 }

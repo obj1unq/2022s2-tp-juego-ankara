@@ -16,7 +16,7 @@ object visorEnergia {
 	}
 	
 	method colisioneCon(character) {
-		//Evita errores.
+		//Polimorfismo.
 	}
 
 }
@@ -36,7 +36,7 @@ object visorPelotas {
 	}
 
 	method colisioneCon(character) {
-		//Evita errores.
+		//Polimorfismo.
 	}
 	
 }
