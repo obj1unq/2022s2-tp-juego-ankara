@@ -20,10 +20,7 @@ class Gatorade {
 	}
 
 	method colisioneCon(lionel) {
-		lionel.energia(self)
-	}
-
-	method serConsumida() {
+		lionel.energia(lionel.energia() + energia)
 		game.removeVisual(self)
 	}
 
@@ -32,7 +29,7 @@ class Gatorade {
 object bolsasDePelotas {
 
 	method agregarNuevo() {
-		const nuevo = new Bolsa()
+		const nuevo = new BolsaDePelotas()
 		game.addVisual(nuevo)
 	}
 
@@ -52,7 +49,5 @@ class BolsaDePelotas {
 		lionel.cantidadDePelotas(lionel.cantidadDePelotas() + cantidad)
 		game.removeVisual(self)
 	}
-
-
 }
 

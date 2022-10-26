@@ -5,7 +5,6 @@ import consumibles.*
 import interfaz.*
 
 const c = game.allVisuals()
-const velocidadDelJuego = 800
 
 program futbolito{
 	game.cellSize(70)
@@ -22,10 +21,10 @@ program futbolito{
 	keyboard.down().onPressDo({ lionel.bajar() })
 	//keyboard.p().onPressDo({ lionel.patearPelota() })
 		// Colliders
-	game.onCollideDo(lionel, { cosa => cosa.colisioneCon(lionel) })
+	//game.onCollideDo(lionel, { cosa => cosa.colisioneCon(lionel) })
 	//game.onCollideDo(pelota, { cosa => cosa.colisioneCon(pelota) })
 		// On ticks
-	game.onTick(velocidadDelJuego, "un_tick", { c.forEach{ c => c.unTick() } }
+	game.onTick(800, "un_tick", { c.forEach{ c => c.unTick() } }
 
 	game.start()
 }

@@ -31,7 +31,7 @@ object visorPelotas {
 	}
 
 	method text() {
-		return "Pelotas: " + lionel.pelotas()
+		return "Pelotas: " + lionel.cantidadDePelotas()
 	}
 
 	method textColor() {
@@ -39,7 +39,6 @@ object visorPelotas {
 	}
 
 	method unTick(){
-		bolsasDePelotas.agregarNuevo()
 	}
 	
 }

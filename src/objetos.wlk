@@ -46,8 +46,10 @@ class Pelota {
 	var property position = game.at(lionel.position().x(), lionel.position().y())
 
 	method serPateada() {
-		
+		//game.tick(500, "movimiento_pelota", {self.moverse()})
 	}
+	
+	
 	
 	//el contrario remueve el visual
 
