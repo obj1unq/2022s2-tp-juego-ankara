@@ -20,8 +20,8 @@ program futbolito{
 	keyboard.down().onPressDo({ lionel.bajar() })
 	//keyboard.p().onPressDo({ lionel.patearPelota() })
 		// Colliders
-	//game.onCollideDo(lionel, { cosa => cosa.colisioneCon(lionel) })
-	//game.onCollideDo(pelota, { cosa => cosa.colisioneCon(pelota) })
+	game.onCollideDo(lionel, { cosa => cosa.colisioneCon(lionel) })
+	game.onCollideDo(pelota, { cosa => cosa.colisioneCon(pelota) })
 		// On ticks
 	game.onTick(1500, "un_tick", { c.forEach{ c => c.unTick() } }
 

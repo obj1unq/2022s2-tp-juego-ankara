@@ -7,10 +7,6 @@ object contrarios {
 		game.addVisual(nuevo)
 	}
 
-	method avanzarTodos() {
-		todos.forEach({ contrario => contrario.avanzar()})
-	}
-
 }
 
 class Contrario {
@@ -27,7 +23,8 @@ class Contrario {
 		position = position.left(1)
 	}
 
-	method colisioneCon(character) {
+	method colisioneCon(objeto) {
+		objeto.energia(objeto.energia() - ataque)
 	}
 
 }

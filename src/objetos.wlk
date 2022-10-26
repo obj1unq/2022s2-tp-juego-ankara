@@ -43,13 +43,13 @@ object pelota {
 class Pelota {
 
 	const property image = "pelota.png"
-	var property position = lionel.position()
+	var property position = game.at(lionel.position().x(), lionel.position().y())
 
 	method serPateada() {
-
+		
 	}
 	
-
+	//el contrario remueve el visual
 
 }
 
