@@ -24,6 +24,7 @@ object lionel {
 		// Agrego condicional para no salir del tablero. Cualquier cosa, lo refactorizamos.
 		if (position.y() != game.height() - 1) {
 			position = position.up(1)
+			self.moverPelota()
 		}
 	}
 
@@ -31,6 +32,13 @@ object lionel {
 		// Agrego condicional para no salir del tablero. Cualquier cosa, lo refactorizamos.
 		if (position.y() != 0) {
 			position = position.down(1)
+			self.moverPelota()
+		}
+	}
+	
+	method moverPelota(){
+		if (pelota.llevandoPelota()){
+			pelota.position(position)
 		}
 	}
 
@@ -57,24 +65,26 @@ object lionel {
 object pelota {
 
 	const property image = "pelota.png"
-	var property position = game.at(1, 2)
+	var property position = lionel.position()
+	var property llevandoPelota = true
 
 	method pateada() {
-		self.validarPosition()
-		self.moverLaPelota_VecesALaDerecha(1)
-		game.onTick(19, "pelotaEnMovimiento", { self.moverLaPelota_VecesALaDerechaSiHayVisualYNoHayObstruccion(1)})
+		// Le saco la validación. Lionel siempre debería tener la pelota antes que la patee.
+		llevandoPelota = false
+		self.moverDerecha()
+		game.onTick(19, "pelotaEnMovimiento", { self.moverDerechaSiHayVisualYNoHayObstruccion()})
 	}
 
-	method moverLaPelota_VecesALaDerechaSiHayVisualYNoHayObstruccion(cantidadDeVeces) {
+	method moverDerechaSiHayVisualYNoHayObstruccion() {
 		if (self.hayVisualDeLaPelota() and not self.hayObstruccion()) {
-			self.moverLaPelota_VecesALaDerecha(cantidadDeVeces)
+			self.moverDerecha()
 		} else {
 			self.pararMovimientoDeLaPelota()
 		}
 	}
 
-	method moverLaPelota_VecesALaDerecha(cantidadDeVeces) {
-		position = position.right(cantidadDeVeces)
+	method moverDerecha() {
+		position = position.right(1)
 	}
 
 	method pararMovimientoDeLaPelota() {
@@ -89,11 +99,14 @@ object pelota {
 		return not game.colliders(self).isEmpty() // indica si hay alguien en la misma posicion
 	}
 
-	method validarPosition() {
-		if (not ( self.position() == lionel.position() )) {
-			self.error("la pelota no está en la misma posicion de lionel")
-		}
+	method colisioneCon(character){
+		// Para que no se rompa cuando colisionan lionel y pelota.
 	}
+	
+	// TODO: Descontar pelotas cada vez que la pateamos
+	// TODO: Hacer que desaparezca la pelota cuando colisiona con un elemento.
+	
+	
 
 }
 
