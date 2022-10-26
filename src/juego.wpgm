@@ -7,24 +7,24 @@ import interfaz.*
 const c = game.allVisuals()
 
 program futbolito{
-	game.cellSize(70)
+	game.cellSize(20)
 	game.width(20)
 	game.height(5)
 	
 	game.addVisual(lionel)
 	
-	game.addVisual(visorEnergia)
-	game.addVisual(visorPelotas)
+	//game.addVisual(visorEnergia)
+	//game.addVisual(visorPelotas)
 	//game.addVisual(new Pelota)
 		// Movimientos de Lionel
 	keyboard.up().onPressDo({ lionel.subir() })
 	keyboard.down().onPressDo({ lionel.bajar() })
-	//keyboard.p().onPressDo({ lionel.patearPelota() })
+	keyboard.p().onPressDo({ lionel.patearPelota() })
 		// Colliders
-	//game.onCollideDo(lionel, { cosa => cosa.colisioneCon(lionel) })
+	game.onCollideDo(lionel, { cosa => cosa.colisioneCon(lionel) })
 	//game.onCollideDo(pelota, { cosa => cosa.colisioneCon(pelota) })
 		// On ticks
-	game.onTick(800, "un_tick", { c.forEach{ c => c.unTick() } }
+	game.onTick(900, "un_tick", { c.forEach{ c => c.unTick() } }
 
 	game.start()
 }

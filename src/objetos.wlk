@@ -28,6 +28,10 @@ object lionel {
 	method unTick(){
 		//Polimorfismo
 	}
+	
+	method patearPelota(){
+		pelotas.agregarNuevo()
+	}
 
 }
 
@@ -36,6 +40,7 @@ object pelotas {
 	method agregarNuevo(){
 		const nuevo = new Pelota()
 		game.addVisual(nuevo)
+		nuevo.serPateada()
 	}
 	
 }
@@ -43,11 +48,17 @@ object pelotas {
 class Pelota {
 
 	const property image = "pelota.png"
-	var property position = game.at(lionel.position().x(), lionel.position().y())
+	var property position = game.at(lionel.position().x() +1 , lionel.position().y())
 
 	method serPateada() {
-		//game.tick(500, "movimiento_pelota", {self.moverse()})
+		game.onTick(100, "movimiento_pelota", {self.moverse()})
 	}
+	
+	method moverse(){
+		game.colliders(self).forEach{o => o.colisionPelota()}
+		position = position.right(1)
+	}
+	
 	
 	
 	

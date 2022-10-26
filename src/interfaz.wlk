@@ -19,6 +19,7 @@ object visorEnergia {
 	
 	method unTick(){
 		contrarios.agregarNuevo()
+		gatorades.agregarNuevo()
 	}
 
 
@@ -39,6 +40,7 @@ object visorPelotas {
 	}
 
 	method unTick(){
+		bolsasDePelotas.agregarNuevo()
 	}
 	
 }

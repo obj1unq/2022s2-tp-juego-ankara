@@ -1,6 +1,6 @@
 import wollok.game.*
 
-object gatoredes {
+object gatorades {
 
 	method agregarNuevo() {
 		const nuevo = new Gatorade()
@@ -23,6 +23,14 @@ class Gatorade {
 		lionel.energia(lionel.energia() + energia)
 		game.removeVisual(self)
 	}
+	
+	method unTick(){
+		position = position.left(1)
+	}
+	
+	method colisionPelota(){
+		//Polimorfismo
+	}
 
 }
 
@@ -41,13 +49,17 @@ class BolsaDePelotas {
 	var property position = game.at(19, (0 .. 4).anyOne())
 	const property cantidad = 5
 
-	method avanzar() {
+	method unTick() {
 		position = position.left(1)
 	}
 
 	method colisioneCon(lionel) {
 		lionel.cantidadDePelotas(lionel.cantidadDePelotas() + cantidad)
 		game.removeVisual(self)
+	}
+	
+	method colisionPelota(){
+		//Polimorfismo
 	}
 }
 
