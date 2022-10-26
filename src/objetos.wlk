@@ -31,7 +31,7 @@ object lionel {
 
 }
 
-object pelota {
+object pelotas {
 	
 	method newPelota(){
 		const nuevo = new Pelota()

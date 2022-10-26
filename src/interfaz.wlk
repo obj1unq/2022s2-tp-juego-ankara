@@ -38,7 +38,7 @@ object visorPelotas {
 	}
 
 	method unTick(){
-		
+		pelotas.agregarNuevo()
 	}
 	
 }

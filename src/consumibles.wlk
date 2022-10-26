@@ -19,8 +19,8 @@ class Gatorade {
 		position = position.left(1)
 	}
 
-	method colisioneCon(character) {
-		character.recibirEnergia(self)
+	method colisioneCon(lionel) {
+		lionel.energia(self)
 	}
 
 	method serConsumida() {
@@ -48,13 +48,11 @@ class BolsaDePelotas {
 		position = position.left(1)
 	}
 
-	method colisioneCon(character) {
-		character.recargarPelotas(self)
-	}
-
-	method serConsumida() {
+	method colisioneCon(lionel) {
+		lionel.cantidadDePelotas(lionel.cantidadDePelotas() + cantidad)
 		game.removeVisual(self)
 	}
+
 
 }
 
