@@ -5,7 +5,7 @@ object lionel {
 	var property camiseta = "lionel-titular.png"
 	var property position = game.at(2, 2)
 	var property energia = 10
-	var property pelotas = 0
+	var property cantidadDePelotas = 0
 
 	method image() {return camiseta}
 
@@ -33,7 +33,7 @@ object lionel {
 
 object pelotas {
 	
-	method newPelota(){
+	method agregarNuevo(){
 		const nuevo = new Pelota()
 		game.addVisual(nuevo)
 	}

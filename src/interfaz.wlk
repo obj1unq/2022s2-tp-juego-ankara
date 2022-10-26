@@ -1,6 +1,7 @@
 import wollok.game.*
 import objetos.*
 import contrarios.*
+import consumibles.*
 
 object visorEnergia {
 
@@ -38,7 +39,7 @@ object visorPelotas {
 	}
 
 	method unTick(){
-		pelotas.agregarNuevo()
+		bolsasDePelotas.agregarNuevo()
 	}
 	
 }
