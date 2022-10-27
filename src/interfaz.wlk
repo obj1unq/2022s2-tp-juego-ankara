@@ -21,6 +21,13 @@ object visorEnergia {
 		contrarios.agregarNuevo()
 		gatorades.agregarNuevo()
 	}
+	
+	method colisioneCon(objeto) {
+	}
+	
+	method colisionPelota(pelota){
+	}
+	
 
 
 }
@@ -41,6 +48,12 @@ object visorPelotas {
 
 	method unTick(){
 		bolsasDePelotas.agregarNuevo()
+	}
+	
+	method colisioneCon(objeto) {
+	}
+	
+	method colisionPelota(pelota){
 	}
 	
 }

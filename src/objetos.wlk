@@ -71,6 +71,10 @@ class Pelota {
 	method moverse(){
 		game.colliders(self).forEach{ o => o.colisionPelota(self)}
 		position = position.right(1)
+		if(position.x() > game.width()){
+			game.removeVisual(self)
+			game.removeTickEvent("movimiento_pelota")
+		}
 	}
 	
 	method unTick(){
