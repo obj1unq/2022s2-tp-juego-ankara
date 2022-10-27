@@ -28,7 +28,7 @@ class Gatorade {
 		position = position.left(1)
 	}
 	
-	method colisionPelota(){
+	method colisionPelota(pelota){
 		//Polimorfismo
 	}
 
@@ -58,7 +58,7 @@ class BolsaDePelotas {
 		game.removeVisual(self)
 	}
 	
-	method colisionPelota(){
+	method colisionPelota(pelota){
 		//Polimorfismo
 	}
 }

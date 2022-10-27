@@ -36,11 +36,25 @@ object lionel {
 }
 
 object pelotas {
+	const property image = "pelota.png"
+	method position() {return lionel.position() }
 	
 	method agregarNuevo(){
 		const nuevo = new Pelota()
 		game.addVisual(nuevo)
 		nuevo.serPateada()
+	}
+	
+	method unTick(){
+		
+	}
+	
+	method colisioneCon(lionel) {
+		//Polimorfismo
+	}
+	
+	method colisionPelota(){
+		
 	}
 	
 }
@@ -55,8 +69,12 @@ class Pelota {
 	}
 	
 	method moverse(){
-		game.colliders(self).forEach{o => o.colisionPelota()}
+		game.colliders(self).forEach{ o => o.colisionPelota(self)}
 		position = position.right(1)
+	}
+	
+	method unTick(){
+		
 	}
 	
 	

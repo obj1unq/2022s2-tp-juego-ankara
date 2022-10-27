@@ -27,8 +27,9 @@ class Contrario {
 		objeto.energia(objeto.energia() - ataque)
 	}
 	
-	method colisionPelota(){
+	method colisionPelota(pelota){
 		game.removeVisual(self)
+		game.removeVisual(pelota)
 	}
 
 }
