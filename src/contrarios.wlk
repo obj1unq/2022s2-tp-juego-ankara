@@ -30,6 +30,7 @@ class Contrario {
 	method colisionPelota(pelota){
 		game.removeVisual(self)
 		game.removeVisual(pelota)
+		game.removeTickEvent("movimiento_pelota")
 	}
 
 }
