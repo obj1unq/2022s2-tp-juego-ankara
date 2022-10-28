@@ -28,9 +28,7 @@ class Contrario {
 	}
 	
 	method colisionPelota(pelota){
-		game.removeVisual(self)
-		game.removeVisual(pelota)
-		game.removeTickEvent(pelota.nombreDeEvento())
+		pelota.borrarPelota()
 	}
 
 }
