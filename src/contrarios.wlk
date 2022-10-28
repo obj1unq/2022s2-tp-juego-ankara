@@ -12,7 +12,7 @@ object contrarios {
 class Contrario {
 
 	var property image = "aleman.png"
-	var property position = game.at(19, (0 .. 4).anyOne())
+	var property position = game.at(game.width() - 1, (0 .. 4).anyOne())
 	const property ataque = 2
 
 	method unTick(){
@@ -29,6 +29,7 @@ class Contrario {
 	
 	method colisionPelota(pelota){
 		pelota.borrarPelota()
+		game.removeVisual(self)
 	}
 
 }

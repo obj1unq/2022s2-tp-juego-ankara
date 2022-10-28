@@ -23,10 +23,14 @@ object visorEnergia {
 	
 	method colisionPelota(pelota){
 	}
+	
+	method unTick(){
+		
+	}
 }
 
 object factorys {
-	const listaDeSpawneables = #{gatorades, contrarios, bolsasDePelotas}
+	const property listaDeSpawneables = [gatorades, contrarios, bolsasDePelotas]
 	
 	method position(){return game.origin()}
 	
