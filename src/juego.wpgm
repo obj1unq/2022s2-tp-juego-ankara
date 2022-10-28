@@ -4,8 +4,6 @@ import contrarios.*
 import consumibles.*
 import interfaz.*
 
-const c = game.allVisuals()	//lista con todos los visuales
-
 //IMPORTANTE:: LOS OBJETOS DE LA INTERFAZ SE USAN COMO "FACTORYS 
 //	DE LAS CLASES DE LOS CONTRINCANTES, PELOTAS, Y CONSUMIBLES
 
@@ -29,7 +27,7 @@ program futbolito{
 	game.onCollideDo(lionel, { cosa => cosa.colisioneCon(lionel) })
 	//game.onCollideDo(pelota, { cosa => cosa.colisioneCon(pelota) })
 		// On ticks
-	game.onTick(900, "un_tick", { c.forEach{ c => c.unTick() } })
+	game.onTick(900, "un_tick", { game.allVisuals().forEach{ o => o.unTick() } })
 
 	game.start()
 }

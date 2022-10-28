@@ -23,17 +23,12 @@ object lionel {
 			position = position.down(1)
 		}
 	}
-	
-	//
+
 	method unTick(){
 		//Polimorfismo
 	}
-	
-	method patearPelota(){
-		pelotas.agregarNuevo()
-	}
-
 }
+
 
 object pelotas {
 	const property image = "pelota.png"
@@ -48,7 +43,7 @@ object pelotas {
 	}
 	
 	method unTick(){
-		
+		//Polimorfismo
 	}
 	
 	method colisioneCon(lionel) {
@@ -56,7 +51,6 @@ object pelotas {
 	}
 	
 	method colisionPelota(){
-		
 	}
 	
 }
