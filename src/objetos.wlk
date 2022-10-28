@@ -27,6 +27,10 @@ object lionel {
 	method unTick(){
 		//Polimorfismo
 	}
+	
+	method patearPelota(){
+		pelotas.agregarNuevo()
+	}
 }
 
 
