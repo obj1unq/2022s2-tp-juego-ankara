@@ -23,8 +23,8 @@ class Contrario {
 		position = position.left(1)
 	}
 
-	method colisioneCon(objeto) {
-		objeto.energia(objeto.energia() - ataque)
+	method colisioneCon(personaje) {
+		personaje.serDebilitadoPor(self)
 	}
 	
 	method colisionPelota(pelota){
