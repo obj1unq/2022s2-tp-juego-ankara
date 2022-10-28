@@ -29,7 +29,10 @@ object lionel {
 	}
 	
 	method patearPelota(){
-		pelotas.agregarNuevo()
+		if(cantidadDePelotas > 0){
+			pelotas.agregarNuevo()
+			cantidadDePelotas -= 1
+		}
 	}
 }
 
