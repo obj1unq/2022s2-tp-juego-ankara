@@ -34,6 +34,18 @@ object lionel {
 			cantidadDePelotas -= 1
 		}
 	}
+	
+	method serDebilitadoPor(contrario){
+		energia -= contrario.ataque()
+		if(energia <= 0) {
+			self.morir()
+		}
+	}
+	
+	method morir(){
+		game.say(self, "Estoy muerto")
+		camiseta = "lionel-muerto.png"
+	}
 }
 
 
