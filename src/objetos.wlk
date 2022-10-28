@@ -40,9 +40,11 @@ object pelotas {
 	method position() {return lionel.position() }
 	
 	method agregarNuevo(){
-		const nuevo = new Pelota()
-		game.addVisual(nuevo)
-		nuevo.serPateada()
+		if(lionel.cantidadDePelotas() > 0){
+			const nuevo = new Pelota()
+			game.addVisual(nuevo)
+			nuevo.serPateada()
+		}			
 	}
 	
 	method unTick(){
@@ -65,24 +67,27 @@ class Pelota {
 	var property position = game.at(lionel.position().x() +1 , lionel.position().y())
 
 	method serPateada() {
-		game.onTick(100, "movimiento_pelota", {self.moverse()})
+		game.onTick(100, self.nombreDeEvento() , {self.moverse()})
 	}
 	
 	method moverse(){
 		game.colliders(self).forEach{ o => o.colisionPelota(self)}
 		position = position.right(1)
 		if(position.x() > game.width()){
+			game.removeTickEvent(self.nombreDeEvento())
 			game.removeVisual(self)
-			game.removeTickEvent("movimiento_pelota")
 		}
 	}
 	
 	method unTick(){
-		
 	}
 	
+	method colisionPelota(pelota){
+	}
 	
-	
+	method nombreDeEvento(){
+		return "movimiento_pelota" + self.identity()
+	}
 	
 	//el contrario remueve el visual
 

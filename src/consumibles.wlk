@@ -12,7 +12,7 @@ object gatorades {
 class Gatorade {
 
 	var property image = "gatorade.png"
-	var property position = game.at(19, (0 .. 4).anyOne())
+	var property position = game.at(19, (0 .. 5).anyOne())
 	const property energia = 4
 
 	method avanzar() {
@@ -46,7 +46,7 @@ object bolsasDePelotas {
 class BolsaDePelotas {
 
 	var property image = "bolsaPelotas.jpg"
-	var property position = game.at(19, (0 .. 4).anyOne())
+	var property position = game.at(19, (0 .. 5).anyOne())
 	const property cantidad = 5
 
 	method unTick() {
