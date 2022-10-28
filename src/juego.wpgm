@@ -4,11 +4,6 @@ import contrarios.*
 import consumibles.*
 import interfaz.*
 
-//IMPORTANTE:: LOS OBJETOS DE LA INTERFAZ SE USAN COMO "FACTORYS 
-//	DE LAS CLASES DE LOS CONTRINCANTES, PELOTAS, Y CONSUMIBLES
-
-//LAS PELOTAS TIRAN ERROR AL SALIR DEL TABLERO
-
 program futbolito{
 	game.cellSize(50)
 	game.width(20)
@@ -20,14 +15,14 @@ program futbolito{
 	game.addVisual(visorEnergia)
 	game.addVisual(visorPelotas)
 	game.addVisual(factorys)
-		// Movimientos de Lionel
+	// Movimientos de Lionel
 	keyboard.up().onPressDo({ lionel.subir() })
 	keyboard.down().onPressDo({ lionel.bajar() })
 	keyboard.p().onPressDo({ lionel.patearPelota() })
-		// Colliders
+	// Colliders
 	game.onCollideDo(lionel, { cosa => cosa.colisioneCon(lionel) })
 	//game.onCollideDo(pelota, { cosa => cosa.colisioneCon(pelota) })
-		// On ticks
+
 	game.onTick(1000, "un_tick", { game.allVisuals().forEach{ o => o.unTick() } })
 
 	game.start()
