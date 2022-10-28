@@ -43,7 +43,9 @@ object lionel {
 	}
 
 	method patear() {
-		pelota.pateada()
+		if (pelota.llevandoPelota()){
+			pelota.pateada()	
+		}
 	}
 
 	method recibirEnergia(botella) {
