@@ -4,27 +4,30 @@ import contrarios.*
 import consumibles.*
 import interfaz.*
 
+//IMPORTANTE:: LOS OBJETOS DE LA INTERFAZ SE USAN COMO "FACTORYS 
+//	DE LAS CLASES DE LOS CONTRINCANTES, PELOTAS, Y CONSUMIBLES
+
+//LAS PELOTAS TIRAN ERROR AL SALIR DEL TABLERO
+
 program futbolito{
-	game.addVisual(lionel)
-	game.cellSize(70)
+	game.cellSize(50)
 	game.width(20)
 	game.height(5)
-	game.addVisual(pelota)
+	
+	game.addVisual(lionel)
+	game.addVisual(pelotas)
+	
 	game.addVisual(visorEnergia)
 	game.addVisual(visorPelotas)
 		// Movimientos de Lionel
 	keyboard.up().onPressDo({ lionel.subir() })
 	keyboard.down().onPressDo({ lionel.bajar() })
-	keyboard.p().onPressDo({ lionel.patear() })
-		// Coliders
+	keyboard.p().onPressDo({ lionel.patearPelota() })
+		// Colliders
 	game.onCollideDo(lionel, { cosa => cosa.colisioneCon(lionel) })
-	game.onCollideDo(pelota, { cosa => cosa.colisioneCon(pelota) })
+	//game.onCollideDo(pelota, { cosa => cosa.colisioneCon(pelota) })
 		// On ticks
-	game.onTick(400, "CONTRARIOS", { contrarios.agregarNuevo() })
-	game.onTick(175, "CONTRARIOS", { contrarios.avanzarTodos() })
-	game.onTick(3000, "BOTELLAS", { botellas.agregarNuevo() })
-	game.onTick(100, "BOTELLAS", { botellas.avanzarTodos() })
-	game.onTick(5000, "BOLSAS", { bolsas.agregarNuevo() })
-	game.onTick(100, "BOLSAS", { bolsas.avanzarTodos() })
+	game.onTick(900, "un_tick", { game.allVisuals().forEach{ o => o.unTick() } })
+
 	game.start()
 }

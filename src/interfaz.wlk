@@ -1,5 +1,7 @@
 import wollok.game.*
 import objetos.*
+import contrarios.*
+import consumibles.*
 
 object visorEnergia {
 
@@ -15,9 +17,18 @@ object visorEnergia {
 		return "000000"
 	}
 	
-	method colisioneCon(character) {
-		//Evita errores.
+	method unTick(){
+		contrarios.agregarNuevo()
+		gatorades.agregarNuevo()
 	}
+	
+	method colisioneCon(objeto) {
+	}
+	
+	method colisionPelota(pelota){
+	}
+	
+
 
 }
 
@@ -28,15 +39,21 @@ object visorPelotas {
 	}
 
 	method text() {
-		return "Pelotas: " + lionel.pelotas()
+		return "Pelotas: " + lionel.cantidadDePelotas()
 	}
 
 	method textColor() {
 		return "000000"
 	}
 
-	method colisioneCon(character) {
-		//Evita errores.
+	method unTick(){
+		bolsasDePelotas.agregarNuevo()
+	}
+	
+	method colisioneCon(objeto) {
+	}
+	
+	method colisionPelota(pelota){
 	}
 	
 }

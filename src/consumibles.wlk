@@ -1,84 +1,65 @@
 import wollok.game.*
 
-object botellas {
-
-	const property todos = #{}
+object gatorades {
 
 	method agregarNuevo() {
-		const nuevo = new Botella()
+		const nuevo = new Gatorade()
 		game.addVisual(nuevo)
-		todos.add(nuevo)
-	}
-
-	method avanzarTodos() {
-		todos.forEach({ botella => botella.avanzar()})
 	}
 
 }
 
-class Botella {
+class Gatorade {
 
 	var property image = "gatorade.png"
-	var property position = game.at(19, (0 .. 4).anyOne())
-	const energia = 4
-
-	method energia() {
-		return energia
-	}
+	var property position = game.at(19, (0 .. 5).anyOne())
+	const property energia = 4
 
 	method avanzar() {
 		position = position.left(1)
 	}
 
-	method colisioneCon(character) {
-		character.recibirEnergia(self)
-	}
-
-	method serConsumida() {
+	method colisioneCon(lionel) {
+		lionel.energia(lionel.energia() + energia)
 		game.removeVisual(self)
-		botellas.todos().remove(self)
+	}
+	
+	method unTick(){
+		position = position.left(1)
+	}
+	
+	method colisionPelota(pelota){
+		//Polimorfismo
 	}
 
 }
 
-object bolsas {
-
-	const property todos = #{}
+object bolsasDePelotas {
 
 	method agregarNuevo() {
-		const nuevo = new Bolsa()
+		const nuevo = new BolsaDePelotas()
 		game.addVisual(nuevo)
-		todos.add(nuevo)
-	}
-
-	method avanzarTodos() {
-		todos.forEach({ bolsa => bolsa.avanzar()})
 	}
 
 }
 
-class Bolsa {
+class BolsaDePelotas {
 
 	var property image = "bolsaPelotas.jpg"
-	var property position = game.at(19, (0 .. 4).anyOne())
-	const cantidad = 5
+	var property position = game.at(19, (0 .. 5).anyOne())
+	const property cantidad = 5
 
-	method cantidad() {
-		return cantidad
-	}
-
-	method avanzar() {
+	method unTick() {
 		position = position.left(1)
 	}
 
-	method colisioneCon(character) {
-		character.recargarPelotas(self)
-	}
-
-	method serConsumida() {
+	method colisioneCon(lionel) {
+		lionel.cantidadDePelotas(lionel.cantidadDePelotas() + cantidad)
 		game.removeVisual(self)
-		bolsas.todos().remove(self)
 	}
-
+	
+	method colisionPelota(pelota){
+		//Polimorfismo
+	}
 }
 
