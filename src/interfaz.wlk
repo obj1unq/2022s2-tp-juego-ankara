@@ -20,6 +20,7 @@ object visorEnergia {
 	method unTick(){
 		contrarios.agregarNuevo()
 		gatorades.agregarNuevo()
+		//ingles.agregarNuevo()
 	}
 	
 	method colisioneCon(objeto) {

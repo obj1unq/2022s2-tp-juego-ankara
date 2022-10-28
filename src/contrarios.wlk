@@ -1,20 +1,10 @@
 import wollok.game.*
 
-object contrarios {
+class Jugador{
+	var property image = null
+	var property position = null
+	const property ataque = null
 	
-	method agregarNuevo() {
-		const nuevo = new Contrario()
-		game.addVisual(nuevo)
-	}
-
-}
-
-class Contrario {
-
-	var property image = "aleman.png"
-	var property position = game.at(19, (0 .. 4).anyOne())
-	const property ataque = 2
-
 	method unTick(){
 		self.avanzar()
 	}
@@ -22,6 +12,49 @@ class Contrario {
 	method avanzar() {
 		position = position.left(1)
 	}
+}
+
+class Factory {
+	
+	method newPosition() {
+		return game.at(19, (0 .. 4).anyOne())
+	}
+
+	method agregarNuevo() {
+		const nuevo = self.nuevo()
+		nuevo.position(self.newPosition())
+		game.addVisual(nuevo)
+	}
+	
+	method nuevo()
+}
+
+object contrarios inherits Factory {
+	
+	override method nuevo() {
+		return  new Contrario()
+	}
+	
+}
+
+object ingles inherits Factory{
+
+	override method nuevo() {
+		return  new Ingles()
+	}
+	
+}
+class Ingles inherits Jugador(image="lionel-titular.png") {
+	
+}
+
+
+class Contrario inherits Jugador(image="aleman.png", ataque = 2) {
+
+	//var property image = "aleman.png"
+	//const property ataque = 2
+
+	
 
 	method colisioneCon(objeto) {
 		objeto.energia(objeto.energia() - ataque)
