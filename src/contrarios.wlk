@@ -1,21 +1,35 @@
 import wollok.game.*
 
-class Jugador{
+class Jugador {
+
 	var property image = null
 	var property position = null
 	const property ataque = null
-	
-	method unTick(){
+
+	method unTick() {
 		self.avanzar()
 	}
-	
+
 	method avanzar() {
 		position = position.left(1)
 	}
+
+	method colisioneCon(objeto) {
+		objeto.energia(objeto.energia() - ataque)
+	}
+
+	method colisionPelota(pelota) {
+		game.removeVisual(self)
+		game.removeVisual(pelota)
+		game.removeTickEvent(pelota.nombreDeEvento())
+	}
+
+	method accionEspecial()
+
 }
 
 class Factory {
-	
+
 	method newPosition() {
 		return game.at(19, (0 .. 4).anyOne())
 	}
@@ -25,45 +39,54 @@ class Factory {
 		nuevo.position(self.newPosition())
 		game.addVisual(nuevo)
 	}
-	
+
 	method nuevo()
+
 }
 
-object contrarios inherits Factory {
-	
-	override method nuevo() {
-		return  new Contrario()
-	}
-	
-}
-
-object ingles inherits Factory{
+object alemanes inherits Factory {
 
 	override method nuevo() {
-		return  new Ingles()
+		return new JugadorAleman()
 	}
-	
-}
-class Ingles inherits Jugador(image="lionel-titular.png") {
-	
+
 }
 
+object ingleses inherits Factory {
 
-class Contrario inherits Jugador(image="aleman.png", ataque = 2) {
-
-	//var property image = "aleman.png"
-	//const property ataque = 2
-
-	
-
-	method colisioneCon(objeto) {
-		objeto.energia(objeto.energia() - ataque)
+	override method nuevo() {
+		return new JugadorIngles()
 	}
-	
-	method colisionPelota(pelota){
-		game.removeVisual(self)
-		game.removeVisual(pelota)
-		game.removeTickEvent(pelota.nombreDeEvento())
+
+}
+
+class JugadorIngles inherits Jugador(image = "ingles.png", ataque = 3) {
+
+
+	override method accionEspecial() {
+	}
+
+}
+
+class JugadorAleman inherits Jugador(image = "aleman.png", ataque = 5) {
+
+
+	override method accionEspecial() {
+	}
+
+}
+
+object brasileros inherits Factory {
+
+	override method nuevo() {
+		return new JugadorBrasilero()
+	}
+
+}
+
+class JugadorBrasilero inherits Jugador(image = "brasilero.png", ataque = 20) {
+
+	override method accionEspecial() {
 	}
 
 }

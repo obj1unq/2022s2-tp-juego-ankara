@@ -18,9 +18,10 @@ object visorEnergia {
 	}
 	
 	method unTick(){
-		contrarios.agregarNuevo()
+		alemanes.agregarNuevo()
 		gatorades.agregarNuevo()
-		//ingles.agregarNuevo()
+		ingleses.agregarNuevo()
+		brasileros.agregarNuevo()
 	}
 	
 	method colisioneCon(objeto) {
