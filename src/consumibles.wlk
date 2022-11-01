@@ -15,21 +15,29 @@ class Gatorade {
 	var property position = game.at(19, (0 .. 5).anyOne())
 	const property energia = 4
 
+	method dentroDelTablero() {
+		return position.x() > 0
+	}
+
 	method avanzar() {
-		position = position.left(1)
+		if (self.dentroDelTablero()) {
+			position = position.left(1)
+		} else {
+			game.removeVisual(self)
+		}
 	}
 
 	method colisioneCon(lionel) {
 		lionel.energia(lionel.energia() + energia)
 		game.removeVisual(self)
 	}
-	
-	method unTick(){
-		position = position.left(1)
+
+	method unTick() {
+		self.avanzar()
 	}
-	
-	method colisionPelota(pelota){
-		//Polimorfismo
+
+	method colisionPelota(pelota) {
+	// Polimorfismo
 	}
 
 }
@@ -49,17 +57,30 @@ class BolsaDePelotas {
 	var property position = game.at(19, (0 .. 5).anyOne())
 	const property cantidad = 5
 
+	method dentroDelTablero() {
+		return position.x() > 0
+	}
+
+	method avanzar() {
+		if (self.dentroDelTablero()) {
+			position = position.left(1)
+		} else {
+			game.removeVisual(self)
+		}
+	}
+
 	method unTick() {
-		position = position.left(1)
+		self.avanzar()
 	}
 
 	method colisioneCon(lionel) {
 		lionel.cantidadDePelotas(lionel.cantidadDePelotas() + cantidad)
 		game.removeVisual(self)
 	}
-	
-	method colisionPelota(pelota){
-		//Polimorfismo
+
+	method colisionPelota(pelota) {
+	// Polimorfismo
 	}
+
 }
 

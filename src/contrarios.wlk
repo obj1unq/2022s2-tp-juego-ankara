@@ -10,8 +10,17 @@ class Jugador {
 		self.avanzar()
 	}
 
+	method dentroDelTablero() {
+		return position.x() > 0
+	}
+
 	method avanzar() {
-		position = position.left(1)
+		if(self.dentroDelTablero()){
+			position = position.left(1)
+		} else {
+			game.removeVisual(self)
+		}
+		
 	}
 
 	method colisioneCon(personaje) {
@@ -62,14 +71,12 @@ object ingleses inherits Factory {
 
 class JugadorIngles inherits Jugador(image = "ingles.png", ataque = 3) {
 
-
 	override method accionEspecial() {
 	}
 
 }
 
 class JugadorAleman inherits Jugador(image = "aleman.png", ataque = 5) {
-
 
 	override method accionEspecial() {
 	}
