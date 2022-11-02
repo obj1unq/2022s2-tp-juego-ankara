@@ -102,7 +102,10 @@ class Pelota {
 		return "movimiento_pelota" + self.identity()
 	}
 	
-	//el contrario remueve el visual
+	method removerse(){
+		game.removeVisual(self)
+		game.removeTickEvent(self.nombreDeEvento())
+	}
 
 }
 
