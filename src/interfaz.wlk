@@ -18,6 +18,14 @@ object visorEnergia {
 		return "000000"
 	}
 	
+
+	method unTick(){
+		alemanes.agregarNuevo()
+		gatorades.agregarNuevo()
+		ingleses.agregarNuevo()
+		brasileros.agregarNuevo()
+	}
+	
 	method colisioneCon(objeto) {
 	}
 	

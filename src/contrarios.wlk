@@ -1,35 +1,98 @@
 import wollok.game.*
 
-object contrarios {
-	
+class Jugador {
+
+	var property image = null
+	var property position = null
+	const property ataque = null
+
+	method unTick() {
+		self.avanzar()
+	}
+
+	method dentroDelTablero() {
+		return position.x() > 0
+	}
+
+	method avanzar() {
+		if(self.dentroDelTablero()){
+			position = position.left(1)
+		} else {
+			game.removeVisual(self)
+		}
+		
+	}
+
+	method colisioneCon(personaje) {
+		personaje.serDebilitadoPor(self)
+	}
+
+	method colisionPelota(pelota) {
+		game.removeVisual(self)
+		pelota.removerse()
+	}
+
+	method accionEspecial()
+
+}
+
+class Factory {
+
+	method newPosition() {
+		return game.at(19, (0 .. 4).anyOne())
+	}
+
 	method agregarNuevo() {
-		const nuevo = new Contrario()
+		const nuevo = self.nuevo()
+		nuevo.position(self.newPosition())
 		game.addVisual(nuevo)
+	}
+
+	method nuevo()
+
+}
+
+object alemanes inherits Factory {
+
+	override method nuevo() {
+		return new JugadorAleman()
+	}
+
+
+}
+
+object ingleses inherits Factory {
+
+	override method nuevo() {
+		return new JugadorIngles()
 	}
 
 }
 
-class Contrario {
+class JugadorIngles inherits Jugador(image = "ingles.png", ataque = 3) {
 
-	var property image = "aleman.png"
-	var property position = game.at(game.width() - 1, (0 .. 4).anyOne())
-	const property ataque = 2
-
-	method unTick(){
-		self.avanzar()
-	}
-	
-	method avanzar() {
-		position = position.left(1)
+	override method accionEspecial() {
 	}
 
-	method colisioneCon(objeto) {
-		objeto.energia(objeto.energia() - ataque)
+}
+
+class JugadorAleman inherits Jugador(image = "aleman.png", ataque = 5) {
+
+	override method accionEspecial() {
 	}
-	
-	method colisionPelota(pelota){
-		pelota.borrarPelota()
-		game.removeVisual(self)
+
+}
+
+object brasileros inherits Factory {
+
+	override method nuevo() {
+		return new JugadorBrasilero()
+	}
+}
+
+class JugadorBrasilero inherits Jugador(image = "brasilero.png", ataque = 20) {
+
+	override method accionEspecial() {
 	}
 
 }

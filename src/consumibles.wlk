@@ -1,65 +1,88 @@
 import wollok.game.*
 
-object gatorades {
+class Consumible {
 
-	method agregarNuevo() {
-		const nuevo = new Gatorade()
-		game.addVisual(nuevo)
+	var property image = null
+	var property position = null
+
+	method dentroDelTablero() {
+		return position.x() > 0
 	}
+
+	method avanzar() {
+		if (self.dentroDelTablero()) {
+			position = position.left(1)
+		} else {
+			game.removeVisual(self)
+		}
+	}
+
+	method unTick() {
+		self.avanzar()
+	}
+
+	method colisionPelota(pelota) {
+	// Polimorfismo
+	}
+
+	method colisioneCon(lionel)
 
 }
 
-class Gatorade {
 
-	var property image = "gatorade.png"
-	var property position = game.at(19, (0 .. 5).anyOne())
-	const property energia = 4
+class Factory {
 
-	method avanzar() {
-		position = position.left(1)
+	method newPosition() {
+		return game.at(19, (0 .. 4).anyOne())
 	}
 
-	method colisioneCon(lionel) {
+	method agregarNuevo() {
+		const nuevo = self.nuevo()
+		nuevo.position(self.newPosition())
+		game.addVisual(nuevo)
+	}
+
+	method nuevo()
+
+}
+
+
+
+object gatorades inherits Factory{
+
+	override method nuevo() {
+		return new Gatorade()
+	}
+	
+
+}
+
+class Gatorade inherits Consumible(image = "gatorade.png") {
+
+	const property energia = 4
+
+	override method colisioneCon(lionel) {
 		lionel.energia(lionel.energia() + energia)
 		game.removeVisual(self)
 	}
-	
-	method unTick(){
-		position = position.left(1)
-	}
-	
-	method colisionPelota(pelota){
-		//Polimorfismo
-	}
 
 }
 
-object bolsasDePelotas {
+object bolsasDePelotas inherits Factory{
 
-	method agregarNuevo() {
-		const nuevo = new BolsaDePelotas()
-		game.addVisual(nuevo)
+	override method nuevo() {
+		return new BolsaDePelotas()
 	}
-
 }
 
-class BolsaDePelotas {
+class BolsaDePelotas inherits Consumible(image = "bolsaPelotas.jpg") {
 
-	var property image = "bolsaPelotas.jpg"
-	var property position = game.at(19, (0 .. 5).anyOne())
 	const property cantidad = 5
 
-	method unTick() {
-		position = position.left(1)
-	}
-
-	method colisioneCon(lionel) {
+	override method colisioneCon(lionel) {
 		lionel.cantidadDePelotas(lionel.cantidadDePelotas() + cantidad)
 		game.removeVisual(self)
 	}
-	
-	method colisionPelota(pelota){
-		//Polimorfismo
-	}
+
 }
 

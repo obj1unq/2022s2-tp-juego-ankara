@@ -29,7 +29,22 @@ object lionel {
 	}
 	
 	method patearPelota(){
-		pelotas.agregarNuevo()
+		if(cantidadDePelotas > 0){
+			pelotas.agregarNuevo()
+			cantidadDePelotas -= 1
+		}
+	}
+	
+	method serDebilitadoPor(contrario){
+		energia -= contrario.ataque()
+		if(energia <= 0) {
+			self.morir()
+		}
+	}
+	
+	method morir(){
+		game.say(self, "Estoy muerto")
+		camiseta = "lionel-muerto.png"
 	}
 }
 
@@ -91,7 +106,10 @@ class Pelota {
 		return "movimiento_pelota" + self.identity()
 	}
 	
-	//el contrario remueve el visual
+	method removerse(){
+		game.removeVisual(self)
+		game.removeTickEvent(self.nombreDeEvento())
+	}
 
 }
 
