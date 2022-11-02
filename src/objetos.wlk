@@ -87,13 +87,8 @@ class Pelota {
 		game.colliders(self).forEach{ o => o.colisionPelota(self)}
 		position = position.right(1)
 		if(position.x() > game.width()){
-			self.borrarPelota()
+			self.removerse()
 		}
-	}
-	
-	method borrarPelota(){
-		game.removeTickEvent(self.nombreDeEvento())
-		game.removeVisual(self)
 	}
 	
 	method unTick(){

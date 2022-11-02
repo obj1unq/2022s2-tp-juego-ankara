@@ -14,7 +14,7 @@ program futbolito{
 	
 	game.addVisual(visorEnergia)
 	game.addVisual(visorPelotas)
-	game.addVisual(factorys)
+	game.addVisual(spawner)
 	// Movimientos de Lionel
 	keyboard.up().onPressDo({ lionel.subir() })
 	keyboard.down().onPressDo({ lionel.bajar() })

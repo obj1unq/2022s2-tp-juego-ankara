@@ -1,4 +1,5 @@
 import wollok.game.*
+import interfaz.*
 
 class Consumible {
 
@@ -29,25 +30,7 @@ class Consumible {
 
 }
 
-
-class Factory {
-
-	method newPosition() {
-		return game.at(19, (0 .. 4).anyOne())
-	}
-
-	method agregarNuevo() {
-		const nuevo = self.nuevo()
-		nuevo.position(self.newPosition())
-		game.addVisual(nuevo)
-	}
-
-	method nuevo()
-
-}
-
-
-
+//gatorades
 object gatorades inherits Factory{
 
 	override method nuevo() {
@@ -68,6 +51,8 @@ class Gatorade inherits Consumible(image = "gatorade.png") {
 
 }
 
+
+//Bolsa De Pelotas
 object bolsasDePelotas inherits Factory{
 
 	override method nuevo() {

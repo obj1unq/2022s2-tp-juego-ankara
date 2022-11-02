@@ -20,10 +20,6 @@ object visorEnergia {
 	
 
 	method unTick(){
-		alemanes.agregarNuevo()
-		gatorades.agregarNuevo()
-		ingleses.agregarNuevo()
-		brasileros.agregarNuevo()
 	}
 	
 	method colisioneCon(objeto) {
@@ -31,21 +27,9 @@ object visorEnergia {
 	
 	method colisionPelota(pelota){
 	}
-	
-	method unTick(){
-		
-	}
+
 }
 
-object factorys {
-	const property listaDeSpawneables = [gatorades, contrarios, bolsasDePelotas]
-	
-	method position(){return game.origin()}
-	
-	method unTick(){
-		listaDeSpawneables.anyOne().agregarNuevo()
-	}
-}
 
 object visorPelotas {
 
@@ -71,5 +55,29 @@ object visorPelotas {
 	}
 }
 
+class Factory {
+
+	method newPosition() {
+		return game.at(19, (0 .. 4).anyOne())
+	}
+
+	method agregarNuevo() {
+		const nuevo = self.nuevo()
+		nuevo.position(self.newPosition())
+		game.addVisual(nuevo)
+	}
+ 
+	method nuevo()
+}
+
+object spawner {
+	const property listaDeSpawneables = [gatorades, ingleses, alemanes, brasileros , bolsasDePelotas]
+	
+	method position(){return game.origin()}
+	
+	method unTick(){
+		listaDeSpawneables.anyOne().agregarNuevo()
+	}
+}
 
 

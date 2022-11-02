@@ -1,4 +1,6 @@
 import wollok.game.*
+import consumibles.*
+import interfaz.*
 
 class Jugador {
 
@@ -20,7 +22,6 @@ class Jugador {
 		} else {
 			game.removeVisual(self)
 		}
-		
 	}
 
 	method colisioneCon(personaje) {
@@ -36,29 +37,11 @@ class Jugador {
 
 }
 
-class Factory {
+//Ingleses
+class JugadorIngles inherits Jugador(image = "ingles.png", ataque = 3) {
 
-	method newPosition() {
-		return game.at(19, (0 .. 4).anyOne())
+	override method accionEspecial() {
 	}
-
-	method agregarNuevo() {
-		const nuevo = self.nuevo()
-		nuevo.position(self.newPosition())
-		game.addVisual(nuevo)
-	}
-
-	method nuevo()
-
-}
-
-object alemanes inherits Factory {
-
-	override method nuevo() {
-		return new JugadorAleman()
-	}
-
-
 }
 
 object ingleses inherits Factory {
@@ -66,17 +49,24 @@ object ingleses inherits Factory {
 	override method nuevo() {
 		return new JugadorIngles()
 	}
-
 }
 
-class JugadorIngles inherits Jugador(image = "ingles.png", ataque = 3) {
+//Alemanes
+class JugadorAleman inherits Jugador(image = "aleman.png", ataque = 5) {
 
 	override method accionEspecial() {
 	}
-
 }
 
-class JugadorAleman inherits Jugador(image = "aleman.png", ataque = 5) {
+object alemanes inherits Factory {
+
+	override method nuevo() {
+		return new JugadorAleman()
+	}
+}
+
+//Brazucas
+class JugadorBrasilero inherits Jugador(image = "brasilero.png", ataque = 20) {
 
 	override method accionEspecial() {
 	}
@@ -88,12 +78,7 @@ object brasileros inherits Factory {
 	override method nuevo() {
 		return new JugadorBrasilero()
 	}
-}
-
-class JugadorBrasilero inherits Jugador(image = "brasilero.png", ataque = 20) {
-
-	override method accionEspecial() {
-	}
 
 }
+
 
