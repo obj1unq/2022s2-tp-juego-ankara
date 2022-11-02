@@ -58,6 +58,7 @@ object alemanes inherits Factory {
 		return new JugadorAleman()
 	}
 
+
 }
 
 object ingleses inherits Factory {
@@ -87,7 +88,6 @@ object brasileros inherits Factory {
 	override method nuevo() {
 		return new JugadorBrasilero()
 	}
-
 }
 
 class JugadorBrasilero inherits Jugador(image = "brasilero.png", ataque = 20) {

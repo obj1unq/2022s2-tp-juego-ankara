@@ -5,7 +5,7 @@ object lionel {
 	var property camiseta = "lionel-titular.png"
 	var property position = game.at(2, 2)
 	var property energia = 10
-	var property cantidadDePelotas = 0
+	var property cantidadDePelotas = 5
 
 	method image() {return camiseta}
 
@@ -87,9 +87,13 @@ class Pelota {
 		game.colliders(self).forEach{ o => o.colisionPelota(self)}
 		position = position.right(1)
 		if(position.x() > game.width()){
-			game.removeTickEvent(self.nombreDeEvento())
-			game.removeVisual(self)
+			self.borrarPelota()
 		}
+	}
+	
+	method borrarPelota(){
+		game.removeTickEvent(self.nombreDeEvento())
+		game.removeVisual(self)
 	}
 	
 	method unTick(){

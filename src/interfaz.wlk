@@ -3,6 +3,7 @@ import objetos.*
 import contrarios.*
 import consumibles.*
 
+
 object visorEnergia {
 
 	method position() {
@@ -17,6 +18,7 @@ object visorEnergia {
 		return "000000"
 	}
 	
+
 	method unTick(){
 		alemanes.agregarNuevo()
 		gatorades.agregarNuevo()
@@ -30,8 +32,19 @@ object visorEnergia {
 	method colisionPelota(pelota){
 	}
 	
+	method unTick(){
+		
+	}
+}
 
-
+object factorys {
+	const property listaDeSpawneables = [gatorades, contrarios, bolsasDePelotas]
+	
+	method position(){return game.origin()}
+	
+	method unTick(){
+		listaDeSpawneables.anyOne().agregarNuevo()
+	}
 }
 
 object visorPelotas {
@@ -49,7 +62,6 @@ object visorPelotas {
 	}
 
 	method unTick(){
-		bolsasDePelotas.agregarNuevo()
 	}
 	
 	method colisioneCon(objeto) {
@@ -57,6 +69,7 @@ object visorPelotas {
 	
 	method colisionPelota(pelota){
 	}
-	
 }
+
+
 
