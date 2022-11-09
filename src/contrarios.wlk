@@ -18,6 +18,7 @@ class Jugador {
 
 	method avanzar() {
 		if(self.dentroDelTablero()){
+			self.accionEspecial()
 			position = position.left(1)
 		} else {
 			game.removeVisual(self)
@@ -39,9 +40,34 @@ class Jugador {
 
 //Ingleses
 class JugadorIngles inherits Jugador(image = "ingles.png", ataque = 3) {
-
+	
+	var property debeSubir = false
+	
 	override method accionEspecial() {
+		if (debeSubir){
+			self.subir()	
+		}
+		else{
+			self.bajar()
+		}
+		debeSubir = !debeSubir
 	}
+	
+	method subir(){
+		position = position.up(1)
+		// No le agrego ninguna validación porque siempre empieza bajando
+	}
+	
+	method bajar(){
+		if (position.y() == 0){
+			debeSubir = !debeSubir
+			self.accionEspecial()
+			debeSubir = !debeSubir
+		} else{
+			position = position.down(1)	
+		}
+	}
+	
 }
 
 object ingleses inherits Factory {
@@ -69,6 +95,7 @@ object alemanes inherits Factory {
 class JugadorBrasilero inherits Jugador(image = "brasilero.png", ataque = 20) {
 
 	override method accionEspecial() {
+		
 	}
 
 }
