@@ -11,7 +11,7 @@ class Consumible {
 
 	method avanzar() {
 		if (self.dentroDelTablero()) {
-			position = position.left(1)
+			position = position.left(1.50)
 		} else {
 			game.removeVisual(self)
 		}
@@ -29,16 +29,11 @@ class Consumible {
 
 }
 
-
 class Factory {
 
-	method newPosition() {
-		return game.at(19, (0 .. 4).anyOne())
-	}
-
-	method agregarNuevo() {
+	method agregarNuevo(position) {
 		const nuevo = self.nuevo()
-		nuevo.position(self.newPosition())
+		nuevo.position(position)
 		game.addVisual(nuevo)
 	}
 
@@ -46,14 +41,11 @@ class Factory {
 
 }
 
-
-
-object gatorades inherits Factory{
+object gatorades inherits Factory {
 
 	override method nuevo() {
 		return new Gatorade()
 	}
-	
 
 }
 
@@ -68,16 +60,17 @@ class Gatorade inherits Consumible(image = "gatorade.png") {
 
 }
 
-object bolsasDePelotas inherits Factory{
+object bolsasDePelotas inherits Factory {
 
 	override method nuevo() {
 		return new BolsaDePelotas()
 	}
+
 }
 
 class BolsaDePelotas inherits Consumible(image = "bolsaPelotas.jpg") {
 
-	const property cantidad = 5
+	const property cantidad = 3
 
 	override method colisioneCon(lionel) {
 		lionel.cantidadDePelotas(lionel.cantidadDePelotas() + cantidad)

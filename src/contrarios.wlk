@@ -15,12 +15,11 @@ class Jugador {
 	}
 
 	method avanzar() {
-		if(self.dentroDelTablero()){
+		if (self.dentroDelTablero()) {
 			position = position.left(1)
 		} else {
 			game.removeVisual(self)
 		}
-		
 	}
 
 	method colisioneCon(personaje) {
@@ -38,13 +37,9 @@ class Jugador {
 
 class Factory {
 
-	method newPosition() {
-		return game.at(19, (0 .. 4).anyOne())
-	}
-
-	method agregarNuevo() {
+	method agregarNuevo(position) {
 		const nuevo = self.nuevo()
-		nuevo.position(self.newPosition())
+		nuevo.position(position)
 		game.addVisual(nuevo)
 	}
 
