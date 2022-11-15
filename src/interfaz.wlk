@@ -3,6 +3,7 @@ import objetos.*
 import contrarios.*
 import consumibles.*
 
+
 object visorEnergia {
 
 	method position() {
@@ -17,16 +18,15 @@ object visorEnergia {
 		return "000000"
 	}
 
-	method unTick() {
-	}
 
+	method unTick(){
+	}
+	
 	method colisioneCon(objeto) {
 	}
 
-	method colisionPelota(pelota) {
-	}
-
 }
+
 
 object visorPelotas {
 
@@ -42,7 +42,8 @@ object visorPelotas {
 		return "000000"
 	}
 
-	method unTick() {
+	method unTick(){
+
 	}
 
 	method colisioneCon(objeto) {
@@ -53,7 +54,7 @@ object visorPelotas {
 
 }
 
-object administradorDeVisuales {
+object spawner {
 
 	const consumibles = [ bolsasDePelotas, gatorades ]
 	const contrarios = [ alemanes, ingleses, brasileros ]
@@ -63,8 +64,9 @@ object administradorDeVisuales {
 	const posiblesPosiciones = [ 1, 2, 3, 4 ]
 
 	method position() {
-		return game.at(1, game.height() - 0.5)
+		return game.origin()
 	}
+
 
 	method randomY() {
 		return posiblesPosiciones.anyOne()
@@ -102,5 +104,7 @@ object administradorDeVisuales {
 	method colisionPelota(pelota) {
 	}
 
+
 }
+
 

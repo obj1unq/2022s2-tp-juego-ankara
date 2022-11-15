@@ -1,4 +1,6 @@
 import wollok.game.*
+import consumibles.*
+import interfaz.*
 
 class Jugador {
 
@@ -35,6 +37,7 @@ class Jugador {
 
 }
 
+
 class Factory {
 
 	method agregarNuevo(position) {
@@ -47,12 +50,13 @@ class Factory {
 
 }
 
-object alemanes inherits Factory {
 
-	override method nuevo() {
-		return new JugadorAleman()
+//Ingleses
+class JugadorIngles inherits Jugador(image = "ingles.png", ataque = 3) {
+
+
+	override method accionEspecial() {
 	}
-
 }
 
 object ingleses inherits Factory {
@@ -60,17 +64,24 @@ object ingleses inherits Factory {
 	override method nuevo() {
 		return new JugadorIngles()
 	}
-
 }
 
-class JugadorIngles inherits Jugador(image = "ingles.png", ataque = 3) {
+//Alemanes
+class JugadorAleman inherits Jugador(image = "aleman.png", ataque = 5) {
 
 	override method accionEspecial() {
 	}
-
 }
 
-class JugadorAleman inherits Jugador(image = "aleman.png", ataque = 5) {
+object alemanes inherits Factory {
+
+	override method nuevo() {
+		return new JugadorAleman()
+	}
+}
+
+//Brazucas
+class JugadorBrasilero inherits Jugador(image = "brasilero.png", ataque = 20) {
 
 	override method accionEspecial() {
 	}
@@ -85,10 +96,4 @@ object brasileros inherits Factory {
 
 }
 
-class JugadorBrasilero inherits Jugador(image = "brasilero.png", ataque = 20) {
-
-	override method accionEspecial() {
-	}
-
-}
 
