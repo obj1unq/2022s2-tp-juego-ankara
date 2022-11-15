@@ -17,15 +17,12 @@ object visorEnergia {
 	method textColor() {
 		return "000000"
 	}
-	
+
 
 	method unTick(){
 	}
 	
 	method colisioneCon(objeto) {
-	}
-	
-	method colisionPelota(pelota){
 	}
 
 }
@@ -46,38 +43,68 @@ object visorPelotas {
 	}
 
 	method unTick(){
+
 	}
-	
+
 	method colisioneCon(objeto) {
 	}
-	
-	method colisionPelota(pelota){
-	}
-}
 
-class Factory {
-
-	method newPosition() {
-		return game.at(19, (0 .. 4).anyOne())
+	method colisionPelota(pelota) {
 	}
 
-	method agregarNuevo() {
-		const nuevo = self.nuevo()
-		nuevo.position(self.newPosition())
-		game.addVisual(nuevo)
-	}
- 
-	method nuevo()
 }
 
 object spawner {
-	const property listaDeSpawneables = [gatorades, ingleses, alemanes, brasileros , bolsasDePelotas]
-	
-	method position(){return game.origin()}
-	
-	method unTick(){
-		listaDeSpawneables.anyOne().agregarNuevo()
+
+	const consumibles = [ bolsasDePelotas, gatorades ]
+	const contrarios = [ alemanes, ingleses, brasileros ]
+	var contrariosAgregadosPorConsumible = 0
+	//
+	var ultimoY = 0
+	const posiblesPosiciones = [ 1, 2, 3, 4 ]
+
+	method position() {
+		return game.origin()
 	}
+
+
+	method randomY() {
+		return posiblesPosiciones.anyOne()
+	}
+
+	method newPosition() {
+		return game.at(19, self.randomY())
+	}
+
+	method agregarConsumible(posicion) {
+		consumibles.anyOne().agregarNuevo(posicion)
+	}
+
+	method agregarContrario(posicion) {
+		contrarios.anyOne().agregarNuevo(posicion)
+	}
+
+	method unTick() {
+		const nuevaPosicion = self.newPosition()
+		posiblesPosiciones.add(ultimoY)
+		if (contrariosAgregadosPorConsumible < 5) {
+			self.agregarContrario(nuevaPosicion)
+			contrariosAgregadosPorConsumible++
+		} else {
+			self.agregarConsumible(nuevaPosicion)
+			contrariosAgregadosPorConsumible = 0
+		}
+		ultimoY = nuevaPosicion.y()
+		posiblesPosiciones.remove(ultimoY)
+	}
+
+	method colisioneCon(objeto) {
+	}
+
+	method colisionPelota(pelota) {
+	}
+
+
 }
 
 

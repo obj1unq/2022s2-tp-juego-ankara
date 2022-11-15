@@ -17,7 +17,7 @@ class Jugador {
 	}
 
 	method avanzar() {
-		if(self.dentroDelTablero()){
+		if (self.dentroDelTablero()) {
 			position = position.left(1)
 		} else {
 			game.removeVisual(self)
@@ -37,8 +37,23 @@ class Jugador {
 
 }
 
+
+class Factory {
+
+	method agregarNuevo(position) {
+		const nuevo = self.nuevo()
+		nuevo.position(position)
+		game.addVisual(nuevo)
+	}
+
+	method nuevo()
+
+}
+
+
 //Ingleses
 class JugadorIngles inherits Jugador(image = "ingles.png", ataque = 3) {
+
 
 	override method accionEspecial() {
 	}
