@@ -6,9 +6,11 @@ import interfaz.*
 
 
 program futbolito{
+	
 	game.cellSize(50)
 	game.width(20)
-	game.height(5)
+	game.height(6)
+	game.boardGround("fondo.jpg")
 	game.addVisual(lionel)
 	game.addVisual(pelotas)
 	game.addVisual(visorEnergia)

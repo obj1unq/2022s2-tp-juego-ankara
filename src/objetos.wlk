@@ -12,7 +12,7 @@ object lionel {
 	// Movimiento
 	method subir() {
 		// Agrego condicional para no salir del tablero. Cualquier cosa, lo refactorizamos.
-		if (position.y() != game.height() - 1) {
+		if (position.y() != campoDeJuego.height() - 1) {
 			position = position.up(1)
 		}
 	}
@@ -106,5 +106,9 @@ class Pelota {
 		game.removeTickEvent(self.nombreDeEvento())
 	}
 
+}
+
+object campoDeJuego{
+	const property height = 5
 }
 
