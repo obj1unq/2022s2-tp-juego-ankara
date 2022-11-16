@@ -23,7 +23,7 @@ program futbolito{
 	// Colliders
 	game.onCollideDo(lionel, { cosa => cosa.colisioneCon(lionel) })
 
-		// game.onCollideDo(pelota, { cosa => cosa.colisioneCon(pelota) })
+	
 		// On ticks
 	game.onTick(200, "un_tick", { game.allVisuals().forEach{ visual => visual.unTick()} })
 
