@@ -97,9 +97,6 @@ object pelotas {
 	// Polimorfismo
 	}
 
-	method colisionPelota() {
-	}
-
 }
 
 class Pelota {

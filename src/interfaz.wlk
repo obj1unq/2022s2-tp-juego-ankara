@@ -3,7 +3,6 @@ import objetos.*
 import contrarios.*
 import consumibles.*
 
-
 object visorEnergia {
 
 	method position() {
@@ -18,15 +17,10 @@ object visorEnergia {
 		return "000000"
 	}
 
-
-	method unTick(){
-	}
-	
-	method colisioneCon(objeto) {
+	method unTick() {
 	}
 
 }
-
 
 object visorPelotas {
 
@@ -42,14 +36,7 @@ object visorPelotas {
 		return "000000"
 	}
 
-	method unTick(){
-
-	}
-
-	method colisioneCon(objeto) {
-	}
-
-	method colisionPelota(pelota) {
+	method unTick() {
 	}
 
 }
@@ -83,20 +70,24 @@ object spawner {
 	const contrarios = [ alemanes, ingleses, brasileros ]
 	var contrariosAgregadosPorConsumible = 0
 	//
-	var ultimoY = 0
-	const posiblesPosiciones = [ 1, 2, 3, 4 ]
+	const posicionInicialDeX = 19
+	var ultimoPosicionDeY = null
+	const posicionesDeYDelJuego = [ 0, 1, 2, 3, 4 ]
+
+	method posicionesDeYPosibles() {
+		return posicionesDeYDelJuego.copyWithout(ultimoPosicionDeY)
+	}
 
 	method position() {
 		return game.origin()
 	}
 
-
-	method randomY() {
-		return posiblesPosiciones.anyOne()
+	method posicionRandomDeY() {
+		return self.posicionesDeYPosibles().anyOne()
 	}
 
 	method newPosition() {
-		return game.at(19, self.randomY())
+		return game.at(posicionInicialDeX, self.posicionRandomDeY())
 	}
 
 	method agregarConsumible(posicion) {
@@ -108,26 +99,23 @@ object spawner {
 	}
 
 	method unTick() {
-		const nuevaPosicion = self.newPosition()
-		posiblesPosiciones.add(ultimoY)
+		self.crearContrarioOConsumibleEn(self.newPosition())
+	}
+
+	method crearContrarioOConsumibleEn(posicion) {
 		if (contrariosAgregadosPorConsumible < 5) {
-			self.agregarContrario(nuevaPosicion)
+			self.agregarContrario(posicion)
 			contrariosAgregadosPorConsumible++
 		} else {
-			self.agregarConsumible(nuevaPosicion)
+			self.agregarConsumible(posicion)
 			contrariosAgregadosPorConsumible = 0
 		}
-		ultimoY = nuevaPosicion.y()
-		posiblesPosiciones.remove(ultimoY)
+		self.guardarUltimaPosicionDeY(posicion)
 	}
 
-	method colisioneCon(objeto) {
+	method guardarUltimaPosicionDeY(posicion) {
+		ultimoPosicionDeY = posicion.y()
 	}
-
-	method colisionPelota(pelota) {
-	}
-
 
 }
-
 
