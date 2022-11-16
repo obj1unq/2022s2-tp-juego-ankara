@@ -54,6 +54,29 @@ object visorPelotas {
 
 }
 
+object visorScore {
+
+	method position() {
+		return game.at(5, game.height() - 0.5)
+	}
+
+	method text() {
+		return "Score: " + lionel.score()
+	}
+
+	method textColor() {
+		return "000000"
+	}
+
+
+	method unTick(){
+	}
+	
+	method colisioneCon(objeto) {
+	}
+
+}
+
 object spawner {
 
 	const consumibles = [ bolsasDePelotas, gatorades ]
