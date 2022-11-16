@@ -15,6 +15,7 @@ program futbolito{
 	game.addVisual(pelotas)
 	game.addVisual(visorEnergia)
 	game.addVisual(visorPelotas)
+	game.addVisual(visorScore)
 
 	game.addVisual(spawner)
 	// Movimientos de Lionel

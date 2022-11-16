@@ -6,7 +6,10 @@ object lionel {
 	var property camiseta = "lionel-titular.png"
 	var property position = game.at(2, 2)
 	var property energia = 10
+
 	var property cantidadDePelotas = 10
+	var property score = 0
+
 
 	method image() {
 		return camiseta
@@ -28,7 +31,9 @@ object lionel {
 	}
 
 	method unTick() {
-	// Polimorfismo
+		if (not self.estaMuerto()){
+			score += 10	
+		}
 	}
 
 	method patearPelota() {
@@ -40,7 +45,7 @@ object lionel {
 
 	method colisionarConContrario(contrario) {
 		energia -= contrario.ataque()
-		if (energia <= 0) {
+		if (self.estaMuerto()) {
 			self.morir()
 		}
 	}
@@ -48,6 +53,10 @@ object lionel {
 	method morir() {
 		game.say(self, "Estoy muerto")
 		camiseta = "lionel-muerto.png"
+	}
+	
+	method estaMuerto(){
+		return energia <= 0
 	}
 
 	method colisionarConConsumible(consumible) {
