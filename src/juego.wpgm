@@ -27,7 +27,7 @@ program futbolito{
 
 	
 		// On ticks
-	game.onTick(2000, "un_tick", { game.allVisuals().forEach{ visual => visual.unTick()} })
+	game.onTick(200, "un_tick", { game.allVisuals().forEach{ visual => visual.unTick()} })
 
 	game.start()
 }

@@ -6,7 +6,7 @@ object lionel {
 	var property camiseta = "lionel-titular.png"
 	var property position = game.at(2, 2)
 	var property energia = 10
-	var property cantidadDePelotas = 40
+	var property cantidadDePelotas = 10
 
 	method image() {
 		return camiseta
