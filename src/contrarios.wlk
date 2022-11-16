@@ -69,6 +69,7 @@ var property debeSubir = false
 		debeSubir = !debeSubir
 	}
 	
+	
 	method subir(){
 		position = position.up(1)
 		// No le agrego ninguna validación porque siempre empieza bajando
