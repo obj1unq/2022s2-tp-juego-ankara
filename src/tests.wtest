@@ -15,3 +15,13 @@ test "Valido si lionel no se va de los extremos" {
 	
 
 }
+
+test "Valido si, cuando un inglés está abajo de todo, no se va del tablero" {
+
+	const ingles = new JugadorIngles()
+	
+	ingles.position(game.at(19, 0))
+	ingles.avanzar()
+	assert.notThat(ingles.debeSubir())
+	assert.equals(game.at(18,1),ingles.position())
+}
