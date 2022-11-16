@@ -22,14 +22,18 @@ class Consumible {
 		self.avanzar()
 	}
 
-	method colisionPelota(pelota) {
-	// Polimorfismo
+	method colisioneCon(elemento) {
+		elemento.colisionarConConsumible(self)
 	}
 
-	method colisioneCon(lionel)
+	method serConsumidoPor(personaje) {
+		self.afectarA(personaje)
+		game.removeVisual(self)
+	}
+
+	method afectarA(personaje)
 
 }
-
 
 class Factory {
 
@@ -44,8 +48,7 @@ class Factory {
 }
 
 //gatorades
-object gatorades inherits Factory{
-
+object gatorades inherits Factory {
 
 	override method nuevo() {
 		return new Gatorade()
@@ -57,17 +60,14 @@ class Gatorade inherits Consumible(image = "gatorade.png") {
 
 	const property energia = 4
 
-	override method colisioneCon(lionel) {
-		lionel.energia(lionel.energia() + energia)
-		game.removeVisual(self)
+	override method afectarA(personaje) {
+		personaje.aumentarEnergia(energia)
 	}
 
 }
 
-
 //Bolsa De Pelotas
-object bolsasDePelotas inherits Factory{
-
+object bolsasDePelotas inherits Factory {
 
 	override method nuevo() {
 		return new BolsaDePelotas()
@@ -79,9 +79,8 @@ class BolsaDePelotas inherits Consumible(image = "bolsaPelotas.jpg") {
 
 	const property cantidad = 3
 
-	override method colisioneCon(lionel) {
-		lionel.cantidadDePelotas(lionel.cantidadDePelotas() + cantidad)
-		game.removeVisual(self)
+	override method afectarA(personaje) {
+		personaje.aumentarPelotas(cantidad)
 	}
 
 }

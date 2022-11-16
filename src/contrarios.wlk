@@ -24,14 +24,17 @@ class Jugador {
 			game.removeVisual(self)
 		}
 	}
-
-	method colisioneCon(personaje) {
-		personaje.serDebilitadoPor(self)
+	
+	method colisionarConContrario(contrario){
+		//Polimorfismo
 	}
 
-	method colisionPelota(pelota) {
+	method colisioneCon(elemento) {
+		elemento.colisionarConContrario(self)
+	}
+
+	method serEliminado() {
 		game.removeVisual(self)
-		pelota.removerse()
 	}
 
 	method accionEspecial()

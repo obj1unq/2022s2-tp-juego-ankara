@@ -2,12 +2,15 @@ import wollok.game.*
 import contrarios.*
 
 object lionel {
+
 	var property camiseta = "lionel-titular.png"
 	var property position = game.at(2, 2)
 	var property energia = 10
 	var property cantidadDePelotas = 40
 
-	method image() {return camiseta}
+	method image() {
+		return camiseta
+	}
 
 	// Movimiento
 	method subir() {
@@ -24,84 +27,110 @@ object lionel {
 		}
 	}
 
-	method unTick(){
-		//Polimorfismo
+	method unTick() {
+	// Polimorfismo
 	}
-	
-	method patearPelota(){
-		if(cantidadDePelotas > 0){
+
+	method patearPelota() {
+		if (cantidadDePelotas > 0) {
 			pelotas.agregarNuevo()
 			cantidadDePelotas -= 1
 		}
 	}
-	
-	method serDebilitadoPor(contrario){
+
+	method colisionarConContrario(contrario) {
 		energia -= contrario.ataque()
-		if(energia <= 0) {
+		if (energia <= 0) {
 			self.morir()
 		}
 	}
-	
-	method morir(){
+
+	method morir() {
 		game.say(self, "Estoy muerto")
 		camiseta = "lionel-muerto.png"
 	}
+
+	method colisionarConConsumible(consumible) {
+		consumible.serConsumidoPor(self)
+	}
+
+	method aumentarEnergia(cantidadDeEnergia) {
+		energia += cantidadDeEnergia
+	}
+
+	method aumentarPelotas(nuevacantidadDePelotas) {
+		cantidadDePelotas += nuevacantidadDePelotas
+	}
+
 }
 
-
 object pelotas {
+
 	const property image = "pelota.png"
-	method position() {return lionel.position() }
-	
-	method agregarNuevo(){
-		if(lionel.cantidadDePelotas() > 0){
+
+	method position() {
+		return lionel.position()
+	}
+
+	method agregarNuevo() {
+		if (lionel.cantidadDePelotas() > 0) {
 			const nuevo = new Pelota()
 			game.addVisual(nuevo)
 			nuevo.serPateada()
-		}			
+		}
 	}
-	
-	method unTick(){
-		//Polimorfismo
+
+	method unTick() {
+	// Polimorfismo
 	}
-	
+
 	method colisioneCon(lionel) {
-		//Polimorfismo
+	// Polimorfismo
 	}
-	
-	method colisionPelota(){
+
+	method colisionPelota() {
 	}
-	
+
 }
 
 class Pelota {
 
 	const property image = "pelota.png"
-	var property position = game.at(lionel.position().x() +1 , lionel.position().y())
+	var property position = game.at(lionel.position().x() + 1, lionel.position().y())
 
 	method serPateada() {
-		game.onTick(100, self.nombreDeEvento() , {self.moverse()})
+		game.onTick(100, self.nombreDeEvento(), { self.moverse()})
 	}
-	
-	method moverse(){
-		game.colliders(self).forEach{ o => o.colisionPelota(self)}
+
+	method moverse() {
+		game.colliders(self).forEach{ o => o.colisioneCon(self)}
 		position = position.right(1)
-		if(position.x() > game.width()){
+		if (position.x() > game.width()) {
 			self.removerse()
 		}
 	}
-	
-	method unTick(){
+
+	method unTick() {
 	}
-	
-	method colisionPelota(pelota){
+
+	method colisioneCon(elemento) {
+	// polimorfismo
 	}
-	
-	method nombreDeEvento(){
+
+	method colisionarConConsumible(consumible) {
+	// polimorfismo
+	}
+
+	method colisionarConContrario(contrario) {
+		contrario.serEliminado()
+		self.removerse()
+	}
+
+	method nombreDeEvento() {
 		return "movimiento_pelota" + self.identity()
 	}
-	
-	method removerse(){
+
+	method removerse() {
 		game.removeVisual(self)
 		game.removeTickEvent(self.nombreDeEvento())
 	}
