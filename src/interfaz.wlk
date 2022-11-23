@@ -3,62 +3,49 @@ import objetos.*
 import contrarios.*
 import consumibles.*
 
-object visorEnergia {
+class Visor{
+	method position()
 
-	method position() {
+	method text()
+
+	method textColor() {
+		return "000000"
+	}
+	method unTick() {
+	}
+}
+
+object visorEnergia inherits Visor{
+
+	override method position() {
 		return game.at(1, game.height() - 0.5)
 	}
 
-	method text() {
+	override method text() {
 		return "Energía: " + lionel.energia()
 	}
-
-	method textColor() {
-		return "000000"
-	}
-
-	method unTick() {
-	}
-
 }
 
-object visorPelotas {
+object visorPelotas inherits Visor {
 
-	method position() {
+	override method position() {
 		return game.at(3, game.height() - 0.5)
 	}
 
-	method text() {
+	override method text() {
 		return "Pelotas: " + lionel.cantidadDePelotas()
 	}
-
-	method textColor() {
-		return "000000"
-	}
-
-	method unTick() {
-	}
-
 }
 
-object visorScore {
+object visorScore inherits Visor{
 
-	method position() {
+	override method position() {
 		return game.at(5, game.height() - 0.5)
 	}
 
-	method text() {
+	override method text() {
 		return "Score: " + lionel.score()
-	}
-
-	method textColor() {
-		return "000000"
-	}
-
-
-	method unTick(){
-	}
-	
+	}	
 	method colisioneCon(objeto) {
 	}
 
