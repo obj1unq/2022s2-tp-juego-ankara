@@ -75,7 +75,7 @@ object bolsasDePelotas inherits Factory {
 
 }
 
-class BolsaDePelotas inherits Consumible(image = "bolsaPelotas.jpg") {
+class BolsaDePelotas inherits Consumible(image = "bolsaPelotas.png") {
 
 	const property cantidad = 3
 
