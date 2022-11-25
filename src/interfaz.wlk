@@ -210,7 +210,7 @@ object nivel2 inherits Nivel {
 	}
 
 	override method contrarios() {
-		return super().add(brasileros)
+		return super() + [ brasileros ]
 	}
 
 	override method nivelSegunScore(score) {
@@ -226,7 +226,7 @@ object nivel3 inherits Nivel {
 	}
 
 	override method contrarios() {
-		return nivel2.contrarios().add(ingleses)
+		return nivel2.contrarios() + [ ingleses ]
 	}
 
 	override method nivelSegunScore(score) {
