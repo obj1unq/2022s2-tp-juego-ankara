@@ -101,12 +101,8 @@ object spawner {
 		return game.at(posicionInicialDeX, self.posicionRandomDeY())
 	}
 
-	method nivelSegunScore(score) {
-		return if (score < 200) nivel0 else if (score < 1000) nivel1 else if (score < 2000) nivel2 else if (score < 3000) nivel3 else nivel4
-	}
-
 	method pasarDeNivelSiCorresponde(score) {
-		nivel = self.nivelSegunScore(score)
+		nivel = nivel.nivelSegunScore(score)
 	}
 
 	method agregarConsumible(posicion) {
@@ -161,10 +157,13 @@ class Nivel {
 		return true
 	}
 
+	method nivelSegunScore(score)
+
 	method unTick() {
 	}
 
 }
+
 
 object nivel0 inherits Nivel {
 
@@ -187,12 +186,20 @@ object nivel0 inherits Nivel {
 		return ticksGuardados == ticksParaCrearAlgo
 	}
 
+	override method nivelSegunScore(score) {
+		return if (score < 200) self else nivel1
+	}
+
 }
 
 object nivel1 inherits Nivel {
 
 	override method nombre() {
 		return "1 - Alemania"
+	}
+
+	override method nivelSegunScore(score) {
+		return if (score < 1000) self else nivel2
 	}
 
 }
@@ -207,6 +214,10 @@ object nivel2 inherits Nivel {
 		return [ alemanes, brasileros ]
 	}
 
+	override method nivelSegunScore(score) {
+		return if (score < 2000) self else nivel3
+	}
+
 }
 
 object nivel3 inherits Nivel {
@@ -217,6 +228,10 @@ object nivel3 inherits Nivel {
 
 	override method contrarios() {
 		return [ alemanes, brasileros, ingleses ]
+	}
+
+	override method nivelSegunScore(score) {
+		return if (score < 3000) self else nivel4
 	}
 
 }
@@ -233,6 +248,10 @@ object nivel4 inherits Nivel {
 
 	override method cantidadDeContrariosPorConsumible() {
 		return 10
+	}
+
+	override method nivelSegunScore(score) {
+		return self
 	}
 
 }
