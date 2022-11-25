@@ -7,10 +7,8 @@ object lionel {
 	var property camiseta = "lionel-titular.png"
 	var property position = game.at(2, 2)
 	var property energia = 10
-
 	var property cantidadDePelotas = 10
 	var property score = 0
-
 
 	method image() {
 		return camiseta
@@ -30,14 +28,18 @@ object lionel {
 			position = position.down(1)
 		}
 	}
-	
-	method aumentarScore(){
+
+	method tienePelotas() {
+		return cantidadDePelotas > 0
+	}
+
+	method aumentarScore() {
 		score += 10
 		spawner.pasarDeNivelSiCorresponde(score)
 	}
 
 	method unTick() {
-		if (not self.estaMuerto()){
+		if (not self.estaMuerto()) {
 			self.aumentarScore()
 		}
 	}
@@ -66,8 +68,8 @@ object lionel {
 		game.sound("hinchada1.mp3").play()
 		game.removeTickEvent("un_tick")
 	}
-	
-	method estaMuerto(){
+
+	method estaMuerto() {
 		return energia <= 0
 	}
 
@@ -87,14 +89,19 @@ object lionel {
 
 object pelotas {
 
-	const property image = "pelota.png"
+	const image = "pelota.png"
+
+	//Se debe hacer una imagen transparente para cuando no tenga la pelota
+	method image() {
+		return if (lionel.tienePelotas()) image else lionel.image()
+	}
 
 	method position() {
 		return lionel.position()
 	}
 
 	method agregarNuevo() {
-		if (lionel.cantidadDePelotas() > 0) {
+		if (lionel.tienePelotas()) {
 			const nuevo = new Pelota()
 			game.addVisual(nuevo)
 			nuevo.serPateada()
@@ -117,8 +124,8 @@ class Pelota {
 	var property position = game.at(lionel.position().x() + 1, lionel.position().y())
 
 	method serPateada() {
-		game.onTick(conf.velocidad()/2, self.nombreDeEvento(), { self.moverse()})
-		game.onCollideDo(self, { o => o.colisioneCon(self) })
+		game.onTick(conf.velocidad() / 2, self.nombreDeEvento(), { self.moverse()})
+		game.onCollideDo(self, { o => o.colisioneCon(self)})
 	}
 
 	method moverse() {
@@ -155,11 +162,14 @@ class Pelota {
 
 }
 
-object conf{
+object conf {
+
 	const property velocidad = 500
+
 }
 
-object campoDeJuego{
+object campoDeJuego {
+
 	const property height = 5
 
 }
