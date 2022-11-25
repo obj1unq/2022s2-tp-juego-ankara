@@ -12,7 +12,7 @@ class Consumible {
 
 	method avanzar() {
 		if (self.dentroDelTablero()) {
-			position = position.left(1.50)
+			position = position.left(1)
 		} else {
 			game.removeVisual(self)
 		}

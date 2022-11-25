@@ -7,7 +7,7 @@ object lionel {
 	var property position = game.at(2, 2)
 	var property energia = 10
 
-	var property cantidadDePelotas = 10
+	var property cantidadDePelotas = 50
 	var property score = 0
 
 
@@ -111,7 +111,7 @@ class Pelota {
 	var property position = game.at(lionel.position().x() + 1, lionel.position().y())
 
 	method serPateada() {
-		game.onTick(conf.velocidad()/2, self.nombreDeEvento(), { self.moverse()})
+		//game.onTick(conf.velocidad(), self.nombreDeEvento(), { self.moverse()})
 		game.onCollideDo(self, { o => o.colisioneCon(self) })
 	}
 
@@ -121,8 +121,15 @@ class Pelota {
 			self.removerse()
 		}
 	}
+	
+	method objetosAdelante(){
+		return game.getObjectsIn(game.at(self.position().x() + 1,self.position().y()))
+	}
 
 	method unTick() {
+		self.moverse()
+		//game.schedule(conf.velocidad()/2,{ self.objetosAdelante().forEach( {o => o.colisioneCon(self)} ) } )
+		self.objetosAdelante().forEach( {o => o.colisioneCon(self)} )
 	}
 
 	method colisioneCon(elemento) {
@@ -144,13 +151,13 @@ class Pelota {
 
 	method removerse() {
 		game.removeVisual(self)
-		game.removeTickEvent(self.nombreDeEvento())
+		//game.removeTickEvent(self.nombreDeEvento())
 	}
 
 }
 
 object conf{
-	const property velocidad = 500
+	const property velocidad = 400
 }
 
 object campoDeJuego{
