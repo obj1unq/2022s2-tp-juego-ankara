@@ -40,11 +40,13 @@ object lionel {
 		if (cantidadDePelotas > 0) {
 			pelotas.agregarNuevo()
 			cantidadDePelotas -= 1
+			game.sound("patada.mp3").play()
 		}
 	}
 
 	method colisionarConContrario(contrario) {
 		energia -= contrario.ataque()
+		game.sound("nearmiss.mp3").play()
 		if (self.estaMuerto()) {
 			self.morir()
 		}
@@ -53,6 +55,10 @@ object lionel {
 	method morir() {
 		game.say(self, "Estoy muerto")
 		camiseta = "lionel-muerto.png"
+		game.sound("silbato.mp3").play()
+		game.sound("no.mp3").play()
+		game.sound("hinchada1.mp3").play()
+		game.removeTickEvent("un_tick")
 	}
 	
 	method estaMuerto(){
@@ -145,5 +151,6 @@ class Pelota {
 
 object campoDeJuego{
 	const property height = 5
+
 }
 

@@ -41,20 +41,6 @@ class Jugador {
 
 }
 
-
-class Factory {
-
-	method agregarNuevo(position) {
-		const nuevo = self.nuevo()
-		nuevo.position(position)
-		game.addVisual(nuevo)
-	}
-
-	method nuevo()
-
-}
-
-
 //Ingleses
 class JugadorIngles inherits Jugador(image = "ingles.png", ataque = 3) {
 var property debeSubir = false
