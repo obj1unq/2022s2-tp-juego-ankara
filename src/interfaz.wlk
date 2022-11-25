@@ -164,7 +164,6 @@ class Nivel {
 
 }
 
-
 object nivel0 inherits Nivel {
 
 	var ticksGuardados = 3
@@ -211,7 +210,7 @@ object nivel2 inherits Nivel {
 	}
 
 	override method contrarios() {
-		return [ alemanes, brasileros ]
+		return super().add(brasileros)
 	}
 
 	override method nivelSegunScore(score) {
@@ -227,7 +226,7 @@ object nivel3 inherits Nivel {
 	}
 
 	override method contrarios() {
-		return [ alemanes, brasileros, ingleses ]
+		return nivel2.contrarios().add(ingleses)
 	}
 
 	override method nivelSegunScore(score) {
@@ -243,7 +242,7 @@ object nivel4 inherits Nivel {
 	}
 
 	override method contrarios() {
-		return [ alemanes, brasileros, ingleses ]
+		return nivel3.contrarios()
 	}
 
 	override method cantidadDeContrariosPorConsumible() {
