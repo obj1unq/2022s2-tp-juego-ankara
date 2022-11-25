@@ -1,5 +1,6 @@
 import wollok.game.*
 import contrarios.*
+import interfaz.*
 
 object lionel {
 
@@ -29,10 +30,15 @@ object lionel {
 			position = position.down(1)
 		}
 	}
+	
+	method aumentarScore(){
+		score += 10
+		spawner.pasarDeNivelSiCorresponde(score)
+	}
 
 	method unTick() {
 		if (not self.estaMuerto()){
-			score += 10	
+			self.aumentarScore()
 		}
 	}
 
