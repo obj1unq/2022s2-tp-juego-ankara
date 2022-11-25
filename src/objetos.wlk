@@ -111,11 +111,11 @@ class Pelota {
 	var property position = game.at(lionel.position().x() + 1, lionel.position().y())
 
 	method serPateada() {
-		game.onTick(100, self.nombreDeEvento(), { self.moverse()})
+		game.onTick(conf.velocidad()/2, self.nombreDeEvento(), { self.moverse()})
+		game.onCollideDo(self, { o => o.colisioneCon(self) })
 	}
 
 	method moverse() {
-		game.colliders(self).forEach{ o => o.colisioneCon(self)}
 		position = position.right(1)
 		if (position.x() > game.width()) {
 			self.removerse()
@@ -147,6 +147,10 @@ class Pelota {
 		game.removeTickEvent(self.nombreDeEvento())
 	}
 
+}
+
+object conf{
+	const property velocidad = 500
 }
 
 object campoDeJuego{
