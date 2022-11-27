@@ -61,12 +61,15 @@ object lionel {
 	}
 
 	method morir() {
-		game.say(self, "Estoy muerto")
-		camiseta = "lionel-muerto.png"
-		game.sound("silbato.mp3").play()
-		game.sound("no.mp3").play()
-		game.sound("hinchada1.mp3").play()
-		game.removeTickEvent("un_tick")
+		if(energia == 0){
+			game.say(self, "Estoy muerto")
+			camiseta = "lionel-muerto.png"
+			game.sound("silbato.mp3").play()
+			game.sound("no.mp3").play()
+			game.sound("hinchada1.mp3").play()
+			game.removeTickEvent("un_tick")
+			energia -= 1
+		}
 	}
 
 	method estaMuerto() {
@@ -83,6 +86,10 @@ object lionel {
 
 	method aumentarPelotas(nuevacantidadDePelotas) {
 		cantidadDePelotas += nuevacantidadDePelotas
+	}
+	
+	method colisioneCon(objeto){
+		//polimorfismo, metodo de colision de todos los objetos menos messi
 	}
 
 }
@@ -112,7 +119,7 @@ object pelotas {
 	// Polimorfismo
 	}
 
-	method colisioneCon(lionel) {
+	method colisioneCon(objeto) {
 	// Polimorfismo
 	}
 
@@ -126,6 +133,7 @@ class Pelota {
 	method serPateada() {
 		game.onTick(conf.velocidad() / 2, self.nombreDeEvento(), { self.moverse()})
 		game.onCollideDo(self, { o => o.colisioneCon(self)})
+		self.asegurarColision()
 	}
 
 	method moverse() {
@@ -133,6 +141,10 @@ class Pelota {
 		if (position.x() > game.width()) {
 			self.removerse()
 		}
+	}
+	
+	method asegurarColision(){
+		game.getObjectsIn(position.left(1)).forEach{ o => o.colisioneCon(self)}
 	}
 
 	method unTick() {
@@ -164,7 +176,7 @@ class Pelota {
 
 object conf {
 
-	const property velocidad = 500
+	const property velocidad = 200
 
 }
 
