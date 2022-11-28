@@ -33,11 +33,15 @@ object visorEnergia inherits Visor {
 object visorPelotas inherits Visor {
 
 	override method position() {
-		return game.at(3, alturaDeVisores)
+		return game.at(game.width() - 3, alturaDeVisores - 0.5)
+	}
+
+	method image() {
+		return "contador-pelota.png"
 	}
 
 	method text() {
-		return "Pelotas: " + lionel.cantidadDePelotas()
+		return "" + lionel.cantidadDePelotas()
 	}
 
 }
