@@ -62,7 +62,6 @@ class Gatorade inherits Consumible(image = "gatorade.png") {
 
 	override method afectarA(personaje) {
 		personaje.aumentarEnergia(energia)
-		game.sound("energia.mp3").play()
 	}
 	
 	override method colisioneCon(elemento){
@@ -86,7 +85,6 @@ class BolsaDePelotas inherits Consumible(image = "bolsaPelotas.png") {
 
 	override method afectarA(personaje) {
 		personaje.aumentarPelotas(cantidad)
-		game.sound("recarga.mp3").play()
 	}
 	
 	override method colisioneCon(elemento){

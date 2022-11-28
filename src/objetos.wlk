@@ -9,6 +9,7 @@ object lionel {
 	var property energia = 10
 	var property cantidadDePelotas = 10
 	var property score = 0
+	const puntosPorPaso = 10
 
 	method image() {
 		return camiseta
@@ -34,7 +35,7 @@ object lionel {
 	}
 
 	method aumentarScore() {
-		score += 10
+		score += puntosPorPaso
 		spawner.pasarDeNivelSiCorresponde(score)
 	}
 
@@ -48,25 +49,31 @@ object lionel {
 		if (cantidadDePelotas > 0) {
 			pelotas.agregarNuevo()
 			cantidadDePelotas -= 1
-			game.sound("patada.mp3").play()
+			sonidos.sonidoPatearPelota()
 		}
 	}
 
 	method colisionarConContrario(contrario) {
 		energia -= contrario.ataque()
-		game.sound("nearmiss.mp3").play()
+		sonidos.sonidoDeAtaqueRecibido()
 		if (self.estaMuerto()) {
 			self.morir()
 		}
 	}
 
+	method avisoDeMuerte() {
+		game.say(self, "Estoy muerto")
+	}
+
+	method cambiarAImagenDeMuerte() {
+		camiseta = "lionel-muerto.png"
+	}
+
 	method morir() {
-		if(energia == 0){
-			game.say(self, "Estoy muerto")
-			camiseta = "lionel-muerto.png"
-			game.sound("silbato.mp3").play()
-			game.sound("no.mp3").play()
-			game.sound("hinchada1.mp3").play()
+		if (energia == 0) {
+			self.avisoDeMuerte()
+			self.cambiarAImagenDeMuerte()
+			sonidos.sonidosDeMuerte()
 			game.removeTickEvent("un_tick")
 			energia -= 1
 		}
@@ -82,25 +89,28 @@ object lionel {
 
 	method aumentarEnergia(cantidadDeEnergia) {
 		energia += cantidadDeEnergia
+		sonidos.sonidoAumentoDeEnergia()
 	}
 
 	method aumentarPelotas(nuevacantidadDePelotas) {
 		cantidadDePelotas += nuevacantidadDePelotas
+		sonidos.sonidoDeRecarga()
 	}
-	
-	method colisioneCon(objeto){
-		//polimorfismo, metodo de colision de todos los objetos menos messi
+
+	method colisioneCon(objeto) {
+	// polimorfismo, metodo de colision de todos los objetos menos messi
 	}
 
 }
 
 object pelotas {
 
-	const image = "pelota.png"
+	const imagenConPelotas = "pelota.png"
+	const imagenSinPelotas = "not-pelota.png"
 
-	//Se debe hacer una imagen transparente para cuando no tenga la pelota
+	// Se debe hacer una imagen transparente para cuando no tenga la pelota
 	method image() {
-		return if (lionel.tienePelotas()) image else lionel.image()
+		return if (lionel.tienePelotas()) imagenConPelotas else imagenSinPelotas
 	}
 
 	method position() {
@@ -142,8 +152,8 @@ class Pelota {
 			self.removerse()
 		}
 	}
-	
-	method asegurarColision(){
+
+	method asegurarColision() {
 		game.getObjectsIn(position.left(1)).forEach{ o => o.colisioneCon(self)}
 	}
 
