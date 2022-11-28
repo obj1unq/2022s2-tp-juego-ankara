@@ -10,6 +10,7 @@ object lionel {
 	var property cantidadDePelotas = 10
 	var property score = 0
 	const puntosPorPaso = 10
+	var recibioAtaque = false
 
 	method image() {
 		return camiseta
@@ -39,10 +40,23 @@ object lionel {
 		spawner.pasarDeNivelSiCorresponde(score)
 	}
 
+	method cambioDeImagenPorContrario() {
+		camiseta = "lionel-golpeado.png"
+	}
+
+	method reseteoDeImagen() {
+		if (recibioAtaque) {
+			recibioAtaque = false
+		} else {
+			camiseta = "lionel-titular.png"
+		}
+	}
+
 	method unTick() {
 		if (not self.estaMuerto()) {
 			self.aumentarScore()
 		}
+		self.reseteoDeImagen()
 	}
 
 	method patearPelota() {
@@ -54,6 +68,8 @@ object lionel {
 	}
 
 	method colisionarConContrario(contrario) {
+		self.cambioDeImagenPorContrario()
+		recibioAtaque = true
 		energia -= contrario.ataque()
 		sonidos.sonidoDeAtaqueRecibido()
 		if (self.estaMuerto()) {
