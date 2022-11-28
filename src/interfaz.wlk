@@ -4,11 +4,10 @@ import contrarios.*
 import consumibles.*
 
 class Visor {
+
 	const alturaDeVisores = game.height() - 0.5
 
 	method position()
-
-	method text()
 
 	method textColor() {
 		return "000000"
@@ -25,7 +24,7 @@ object visorEnergia inherits Visor {
 		return game.at(1, alturaDeVisores)
 	}
 
-	override method text() {
+	method text() {
 		return "Energía: " + lionel.energia()
 	}
 
@@ -37,7 +36,7 @@ object visorPelotas inherits Visor {
 		return game.at(3, alturaDeVisores)
 	}
 
-	override method text() {
+	method text() {
 		return "Pelotas: " + lionel.cantidadDePelotas()
 	}
 
@@ -49,7 +48,7 @@ object visorScore inherits Visor {
 		return game.at(5, alturaDeVisores)
 	}
 
-	override method text() {
+	method text() {
 		return "Score: " + lionel.score()
 	}
 
@@ -61,11 +60,11 @@ object visorScore inherits Visor {
 object visorNivel inherits Visor {
 
 	override method position() {
-		return game.at(8, alturaDeVisores)
+		return game.at(game.width() - 1.5, alturaDeVisores)
 	}
 
-	override method text() {
-		return "Nivel: " + spawner.nivel().nombre()
+	method image() {
+		return spawner.nivel().imagenBanderas()
 	}
 
 	method colisioneCon(objeto) {
@@ -142,6 +141,8 @@ class Nivel {
 
 	method nombre()
 
+	method imagenBanderas()
+
 	method contrarios() {
 		return [ alemanes ]
 	}
@@ -174,6 +175,10 @@ object nivel0 inherits Nivel {
 		return "1 - Alemania"
 	}
 
+	override method imagenBanderas() {
+		return "nivel1.png"
+	}
+
 	override method unTick() {
 		if (ticksGuardados < ticksParaCrearAlgo) {
 			ticksGuardados += 1
@@ -194,6 +199,10 @@ object nivel0 inherits Nivel {
 
 object nivel1 inherits Nivel {
 
+	override method imagenBanderas() {
+		return "nivel1.png"
+	}
+
 	override method nombre() {
 		return "1 - Alemania"
 	}
@@ -205,6 +214,10 @@ object nivel1 inherits Nivel {
 }
 
 object nivel2 inherits Nivel {
+
+	override method imagenBanderas() {
+		return "nivel2.png"
+	}
 
 	override method nombre() {
 		return "2 - Alemania y Brasil"
@@ -222,6 +235,10 @@ object nivel2 inherits Nivel {
 
 object nivel3 inherits Nivel {
 
+	override method imagenBanderas() {
+		return "nivel3.png"
+	}
+
 	override method nombre() {
 		return "3 - Alemania, Brasil e Inglaterra"
 	}
@@ -237,6 +254,10 @@ object nivel3 inherits Nivel {
 }
 
 object nivel4 inherits Nivel {
+
+	override method imagenBanderas() {
+		return "nivel3.png"
+	}
 
 	override method nombre() {
 		return "3 - Alemania, Brasil e Inglaterra"
