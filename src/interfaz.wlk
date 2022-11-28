@@ -4,6 +4,7 @@ import contrarios.*
 import consumibles.*
 
 class Visor {
+	const alturaDeVisores = game.height() - 0.5
 
 	method position()
 
@@ -21,7 +22,7 @@ class Visor {
 object visorEnergia inherits Visor {
 
 	override method position() {
-		return game.at(1, game.height() - 0.5)
+		return game.at(1, alturaDeVisores)
 	}
 
 	override method text() {
@@ -33,7 +34,7 @@ object visorEnergia inherits Visor {
 object visorPelotas inherits Visor {
 
 	override method position() {
-		return game.at(3, game.height() - 0.5)
+		return game.at(3, alturaDeVisores)
 	}
 
 	override method text() {
@@ -45,7 +46,7 @@ object visorPelotas inherits Visor {
 object visorScore inherits Visor {
 
 	override method position() {
-		return game.at(5, game.height() - 0.5)
+		return game.at(5, alturaDeVisores)
 	}
 
 	override method text() {
@@ -60,7 +61,7 @@ object visorScore inherits Visor {
 object visorNivel inherits Visor {
 
 	override method position() {
-		return game.at(8, game.height() - 0.5)
+		return game.at(8, alturaDeVisores)
 	}
 
 	override method text() {
@@ -251,6 +252,32 @@ object nivel4 inherits Nivel {
 
 	override method nivelSegunScore(score) {
 		return self
+	}
+
+}
+
+object sonidos {
+
+	method sonidoDeAtaqueRecibido() {
+		game.sound("nearmiss.mp3").play()
+	}
+
+	method sonidosDeMuerte() {
+		game.sound("silbato.mp3").play()
+		game.sound("no.mp3").play()
+		game.sound("hinchada1.mp3").play()
+	}
+
+	method sonidoPatearPelota() {
+		game.sound("patada.mp3").play()
+	}
+
+	method sonidoDeRecarga() {
+		game.sound("recarga.mp3").play()
+	}
+
+	method sonidoAumentoDeEnergia() {
+		game.sound("energia.mp3").play()
 	}
 
 }
