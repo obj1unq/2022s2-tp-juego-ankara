@@ -11,6 +11,7 @@ object lionel {
 	var property score = 0
 	const puntosPorPaso = 10
 	var recibioAtaque = false
+	var recibioConsumible = false
 
 	method image() {
 		return camiseta
@@ -47,6 +48,11 @@ object lionel {
 	method reseteoDeImagen() {
 		if (recibioAtaque) {
 			recibioAtaque = false
+		} else {
+			camiseta = "lionel-titular.png"
+		}
+		if (recibioConsumible) {
+			recibioConsumible = false
 		} else {
 			camiseta = "lionel-titular.png"
 		}
@@ -99,7 +105,14 @@ object lionel {
 		return energia <= 0
 	}
 
+	method cambiarAImagenDeConsumible() {
+		camiseta = "lionel-contento.png"
+	}
+
 	method colisionarConConsumible(consumible) {
+		game.say(self, "Messirve")
+		self.cambiarAImagenDeConsumible()
+		recibioConsumible = true
 		consumible.serConsumidoPor(self)
 	}
 
