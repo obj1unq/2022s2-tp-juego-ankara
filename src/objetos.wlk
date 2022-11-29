@@ -92,13 +92,12 @@ object lionel {
 	}
 
 	method morir() {
-		if (energia == 0) {
-			self.avisoDeMuerte()
-			self.cambiarAImagenDeMuerte()
-			sonidos.sonidosDeMuerte()
-			game.removeTickEvent("un_tick")
-			energia -= 1
-		}
+		self.avisoDeMuerte()
+		self.cambiarAImagenDeMuerte()
+		sonidos.sonidosDeMuerte()
+		game.removeTickEvent("un_tick")
+		energia = null
+		
 	}
 
 	method estaMuerto() {
@@ -171,11 +170,11 @@ class Pelota {
 
 	method serPateada() {
 		game.onTick(conf.velocidad() / 2, self.nombreDeEvento(), { self.moverse()})
-		game.onCollideDo(self, { o => o.colisioneCon(self)})
-		self.asegurarColision()
 	}
 
 	method moverse() {
+		game.onCollideDo(self, { o => o.colisioneCon(self)})
+		self.asegurarColision()
 		position = position.right(1)
 		if (position.x() > game.width()) {
 			self.removerse()

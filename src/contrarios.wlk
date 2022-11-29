@@ -21,7 +21,7 @@ class Jugador {
 			self.accionEspecial()
 			position = position.left(1)
 		} else {
-			game.removeVisual(self)
+			self.serEliminado()
 		}
 	}
 	
@@ -43,7 +43,7 @@ class Jugador {
 
 //Ingleses
 class JugadorIngles inherits Jugador(image = "ingles.png", ataque = 3) {
-var property debeSubir = false
+	var property debeSubir = false
 	
 	override method accionEspecial() {
 		if (debeSubir){
