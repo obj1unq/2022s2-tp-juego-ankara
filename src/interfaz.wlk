@@ -3,6 +3,8 @@ import objetos.*
 import contrarios.*
 import consumibles.*
 
+const musicaMenu = game.sound("musicaMenu.mp3")
+
 class Visor {
 
 	const alturaDeVisores = game.height() - 0.5
@@ -308,7 +310,9 @@ object sonidos {
 }
 
 object menuPrincipal {
-	const property position = game.origin()
+	var musicaActiva = false
+	
+	method position(){return game.origin()}
 	
 	method image(){
 		return "menuPrincipal.png"
@@ -320,6 +324,7 @@ object menuPrincipal {
 	}
 	
 	method inicializarJuego(){
+		
 		lionel.iniciar()
 		game.addVisual(pelotas)
 		game.addVisual(visorEnergia)
@@ -331,5 +336,38 @@ object menuPrincipal {
 	
 	method unTick(){
 		//polimorfismo
+		self.activarMusica()
+	}
+	
+	method activarMusica(){
+		if(not musicaActiva){
+			musicaMenu.play()
+			musicaActiva = true
+		}
 	}
 }
+
+object gameOver{
+	method position(){return game.origin()}
+	method image(){return "gameOver.png"}
+	
+	method perder(){
+		game.removeTickEvent("un_tick")
+		game.addVisualIn(puntajeFinal, game.at(10,0))
+		musicaMenu.stop()
+	}
+	
+	method unTick(){
+		//polimorfismo
+	}
+}
+
+object puntajeFinal{
+	method text(){return "Mejor Puntaje: " + lionel.score()}
+	method textColor() {return "FF0000"}
+	
+	method unTick(){
+		//polimorfismo
+	}
+}
+

@@ -84,6 +84,7 @@ object lionel {
 		sonidos.sonidoDeAtaqueRecibido()
 		if (self.estaMuerto()) {
 			self.morir()
+			contrario.serEliminado()
 		}
 	}
 
@@ -99,9 +100,8 @@ object lionel {
 		self.avisoDeMuerte()
 		self.cambiarAImagenDeMuerte()
 		sonidos.sonidosDeMuerte()
-		game.removeTickEvent("un_tick")
-		energia = null
-		
+		game.addVisual(gameOver)
+		gameOver.perder()
 	}
 
 	method estaMuerto() {
