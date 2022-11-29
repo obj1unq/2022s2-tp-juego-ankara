@@ -311,27 +311,29 @@ object sonidos {
 
 object menuPrincipal {
 	var musicaActiva = false
+	var juegoComenzado = false
+	var imagen = "menuPrincipal.png"
 	
 	method position(){return game.origin()}
 	
-	method image(){
-		return "menuPrincipal.png"
-	}
+	method image(){ return imagen }
 	
 	method comenzar(){
-		game.removeVisual(self)
+		imagen = "pngVacio.png"
 		self.inicializarJuego()
 	}
 	
 	method inicializarJuego(){
-		
-		lionel.iniciar()
-		game.addVisual(pelotas)
-		game.addVisual(visorEnergia)
-		game.addVisual(visorPelotas)
-		game.addVisual(visorScore)
-		game.addVisual(visorNivel)
-		game.addVisual(spawner)
+		if(not juegoComenzado){
+			lionel.iniciar()
+			game.addVisual(pelotas)
+			game.addVisual(visorEnergia)
+			game.addVisual(visorPelotas)
+			game.addVisual(visorScore)
+			game.addVisual(visorNivel)
+			game.addVisual(spawner)
+			juegoComenzado = true
+		}
 	}
 	
 	method unTick(){
