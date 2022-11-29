@@ -4,7 +4,7 @@ import interfaz.*
 
 object lionel {
 
-	var property camiseta = "lionel-titular.png"
+	var property camiseta = "pngVacio.png"
 	var property position = game.at(2, 2)
 	var property energia = 10
 	var property cantidadDePelotas = 10
@@ -15,6 +15,10 @@ object lionel {
 
 	method image() {
 		return camiseta
+	}
+
+	method iniciar(){
+		camiseta = "lionel-titular.png"
 	}
 
 	// Movimiento
@@ -134,7 +138,7 @@ object lionel {
 object pelotas {
 
 	const imagenConPelotas = "pelota.png"
-	const imagenSinPelotas = "not-pelota.png"
+	const imagenSinPelotas = "pngVacio.png"
 
 	// Se debe hacer una imagen transparente para cuando no tenga la pelota
 	method image() {

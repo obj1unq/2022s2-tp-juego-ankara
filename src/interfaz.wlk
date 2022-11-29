@@ -308,11 +308,25 @@ object sonidos {
 }
 
 object menuPrincipal {
-	method position(){return game.at(0,19)}
-	method image(){return "menuPrincipal.png"}
+	const property position = game.origin()
+	
+	method image(){
+		return "menuPrincipal.png"
+	}
 	
 	method comenzar(){
 		game.removeVisual(self)
+		self.inicializarJuego()
+	}
+	
+	method inicializarJuego(){
+		lionel.iniciar()
+		game.addVisual(pelotas)
+		game.addVisual(visorEnergia)
+		game.addVisual(visorPelotas)
+		game.addVisual(visorScore)
+		game.addVisual(visorNivel)
+		game.addVisual(spawner)
 	}
 	
 	method unTick(){
