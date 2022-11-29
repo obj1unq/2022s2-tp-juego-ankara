@@ -3,6 +3,8 @@ import objetos.*
 import contrarios.*
 import consumibles.*
 
+const musicaMenu = game.sound("musicaMenu.mp3")
+
 class Visor {
 
 	const alturaDeVisores = game.height() - 0.5
@@ -305,5 +307,69 @@ object sonidos {
 		game.sound("energia.mp3").play()
 	}
 
+}
+
+object menuPrincipal {
+	var musicaActiva = false
+	var juegoComenzado = false
+	var imagen = "menuPrincipal.png"
+	
+	method position(){return game.origin()}
+	
+	method image(){ return imagen }
+	
+	method comenzar(){
+		imagen = "pngVacio.png"
+		self.inicializarJuego()
+	}
+	
+	method inicializarJuego(){
+		if(not juegoComenzado){
+			lionel.iniciar()
+			game.addVisual(pelotas)
+			game.addVisual(visorEnergia)
+			game.addVisual(visorPelotas)
+			game.addVisual(visorScore)
+			game.addVisual(visorNivel)
+			game.addVisual(spawner)
+			juegoComenzado = true
+		}
+	}
+	
+	method unTick(){
+		//polimorfismo
+		self.activarMusica()
+	}
+	
+	method activarMusica(){
+		if(not musicaActiva){
+			musicaMenu.play()
+			musicaActiva = true
+		}
+	}
+}
+
+object gameOver{
+	method position(){return game.origin()}
+	method image(){return "gameOver.png"}
+	
+	method perder(){
+		game.removeTickEvent("un_tick")
+		game.addVisualIn(puntajeFinal, game.at(10,0))
+		musicaMenu.stop()
+	}
+	
+	method unTick(){
+		//polimorfismo
+	}
+}
+
+object puntajeFinal{
+	method text(){return "Mejor Puntaje: " + lionel.score()}
+	method textColor() {return "FF0000"}
+	
+	method unTick(){
+		//polimorfismo
+	}
 }
 

@@ -11,18 +11,21 @@ program futbolito{
 	game.width(20)
 	game.height(6)
 	game.boardGround("fondo.jpg")
-	game.addVisual(lionel)
-	game.addVisual(pelotas)
-	game.addVisual(visorEnergia)
-	game.addVisual(visorPelotas)
-	game.addVisual(visorScore)
-	game.addVisual(visorNivel)
-	game.addVisual(spawner)
+	
 	// Movimientos de Lionel
 
+	game.addVisual(lionel)
 	keyboard.up().onPressDo({ lionel.subir() })
 	keyboard.down().onPressDo({ lionel.bajar() })
 	keyboard.p().onPressDo({ lionel.patearPelota() })
+	
+	//menu 
+	
+	
+	game.addVisual(menuPrincipal)
+	keyboard.enter().onPressDo({ menuPrincipal.comenzar()})
+	
+	
 	// Colliders
 	game.onCollideDo(lionel, { cosa => cosa.colisioneCon(lionel) })
 
