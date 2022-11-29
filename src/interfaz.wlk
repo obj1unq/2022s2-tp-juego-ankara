@@ -307,3 +307,15 @@ object sonidos {
 
 }
 
+object menuPrincipal {
+	method position(){return game.at(0,19)}
+	method image(){return "menuPrincipal.png"}
+	
+	method comenzar(){
+		game.removeVisual(self)
+	}
+	
+	method unTick(){
+		//polimorfismo
+	}
+}

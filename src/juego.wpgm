@@ -18,11 +18,21 @@ program futbolito{
 	game.addVisual(visorScore)
 	game.addVisual(visorNivel)
 	game.addVisual(spawner)
+	
+	
 	// Movimientos de Lionel
 
 	keyboard.up().onPressDo({ lionel.subir() })
 	keyboard.down().onPressDo({ lionel.bajar() })
 	keyboard.p().onPressDo({ lionel.patearPelota() })
+	
+	//menu 
+	
+	
+	game.addVisual(menuPrincipal)
+	keyboard.enter().onPressDo({ menuPrincipal.comenzar()})
+	
+	
 	// Colliders
 	game.onCollideDo(lionel, { cosa => cosa.colisioneCon(lionel) })
 
