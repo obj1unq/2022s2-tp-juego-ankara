@@ -1,10 +1,11 @@
-# Nombre del juego (<- borrar y completar)
+Ankara Messi!
 
 ## Equipo de desarrollo
 
-- Alguien
-- Persona
-- etc.
+- Acosta Matias
+- 
+- 
+-
 
 ## Capturas
 
@@ -17,6 +18,6 @@
 
 ## Otros
 
-- Curso/Facultad
-- Versión de wollok
+- Universidad Nacional De Quilmes | Programacion con objetos I
+- Wollok Version 3.0.0
 - Una vez terminado, no tenemos problemas en que el repositorio sea público / queremos manternerlo privado
