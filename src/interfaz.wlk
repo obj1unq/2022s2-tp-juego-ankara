@@ -80,7 +80,7 @@ object visorNivel inherits Visor {
 
 object spawner {
 
-	var nivel = nivel0
+	var property nivel = nivel0
 	var contrariosAgregadosPorConsumible = 0
 	//
 	const posicionInicialDeX = 19
@@ -93,10 +93,6 @@ object spawner {
 
 	method position() {
 		return game.origin()
-	}
-
-	method nivel() {
-		return nivel
 	}
 
 	method posicionRandomDeY() {
@@ -310,8 +306,9 @@ object sonidos {
 }
 
 object menuPrincipal {
+	const volumen = 0.1
 	var musicaActiva = false
-	var juegoComenzado = false
+	var property juegoComenzado = false
 	var imagen = "menuPrincipal.png"
 	
 	method position(){return game.origin()}
@@ -326,6 +323,7 @@ object menuPrincipal {
 	method inicializarJuego(){
 		if(not juegoComenzado){
 			lionel.iniciar()
+			self.inicializarValores()
 			game.addVisual(pelotas)
 			game.addVisual(visorEnergia)
 			game.addVisual(visorPelotas)
@@ -336,6 +334,12 @@ object menuPrincipal {
 		}
 	}
 	
+	method inicializarValores(){
+		lionel.score(0)
+		//lionel.cantidadDePelotas(10)
+		spawner.nivel(nivel0)
+	}
+	
 	method unTick(){
 		//polimorfismo
 		self.activarMusica()
@@ -343,6 +347,7 @@ object menuPrincipal {
 	
 	method activarMusica(){
 		if(not musicaActiva){
+			musicaMenu.volume(volumen)
 			musicaMenu.play()
 			musicaActiva = true
 		}
@@ -354,9 +359,21 @@ object gameOver{
 	method image(){return "gameOver.png"}
 	
 	method perder(){
-		game.removeTickEvent("un_tick")
+		programa.estado(finalizado)
 		game.addVisualIn(puntajeFinal, game.at(10,0))
+		game.addVisualIn(mensajeReplay, game.at(10,game.height() - 1))
 		musicaMenu.stop()
+	}
+	
+	method volverAJugar(){
+		menuPrincipal.juegoComenzado(false)
+		game.allVisuals().forEach({visual => game.removeVisual(visual)})
+		//restauro visuales
+		
+		game.addVisual(lionel)
+		menuPrincipal.comenzar()
+		lionel.energia(10)
+		programa.estado(corriendo)
 	}
 	
 	method unTick(){
@@ -365,7 +382,7 @@ object gameOver{
 }
 
 object puntajeFinal{
-	method text(){return "Mejor Puntaje: " + lionel.score()}
+	method text(){return "Mejor Puntaje: " + lionel.maximoScore()}
 	method textColor() {return "FF0000"}
 	
 	method unTick(){
@@ -373,3 +390,54 @@ object puntajeFinal{
 	}
 }
 
+object mensajeReplay{
+	method text(){return "Apreta enter para volver a jugar "}
+	method textColor() {return "FF0000"}
+	
+	method unTick(){
+		//polimorfismo
+	}
+}
+
+object programa{
+	var property estado = inicio
+	
+	method onTick(){
+		estado.onTick()
+	}
+	
+	method iniciar(){
+		estado.iniciar()
+	}
+}
+
+object inicio{
+	method iniciar(){
+		menuPrincipal.comenzar()
+		programa.estado(corriendo)
+	}
+	
+	method onTick(){
+	
+	}
+}
+
+object corriendo{
+	method iniciar(){
+
+	}
+	
+	method onTick(){
+		game.allVisuals().forEach{ visual => visual.unTick()}
+	}
+}
+
+object finalizado{
+	method iniciar(){
+		gameOver.volverAJugar()
+	}
+	
+	method onTick(){
+		
+	}
+}

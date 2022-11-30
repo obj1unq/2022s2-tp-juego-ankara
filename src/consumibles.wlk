@@ -19,7 +19,7 @@ class Consumible {
 	}
 
 	method unTick() {
-		self.avanzar()
+		self.avanzar()	
 	}
 
 	method colisioneCon(elemento) {

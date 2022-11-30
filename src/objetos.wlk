@@ -9,6 +9,7 @@ object lionel {
 	var property energia = 10
 	var property cantidadDePelotas = 10
 	var property score = 0
+	var property maximoScore = 0
 	const puntosPorPaso = 10
 	var recibioAtaque = false
 	var recibioConsumible = false
@@ -63,10 +64,10 @@ object lionel {
 	}
 
 	method unTick() {
-		if (not self.estaMuerto()) {
+		if (not self.estaMuerto()){
 			self.aumentarScore()
 		}
-		self.reseteoDeImagen()
+		self.reseteoDeImagen()	
 	}
 
 	method patearPelota() {
@@ -101,6 +102,7 @@ object lionel {
 		self.cambiarAImagenDeMuerte()
 		sonidos.sonidosDeMuerte()
 		game.addVisual(gameOver)
+		maximoScore = maximoScore.max(score)
 		gameOver.perder()
 	}
 
