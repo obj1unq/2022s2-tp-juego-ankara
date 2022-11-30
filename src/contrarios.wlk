@@ -9,7 +9,7 @@ class Jugador {
 	const property ataque = null
 
 	method unTick() {
-		self.avanzar()
+		self.avanzar()	
 	}
 
 	method dentroDelTablero() {
