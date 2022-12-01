@@ -25,21 +25,38 @@ object visorEnergia inherits Visor {
 	override method position() {
 		return game.at(1, alturaDeVisores)
 	}
+	
+	method image(){return self.energiaDeMessi()}
 
 	method text() {
 		return "Energía: " + lionel.energia()
 	}
-
+	
+	method energiaDeMessi(){
+		if(lionel.energia() <= 0){
+			return "energia0.png"
+		}else if (lionel.energia() < 10){
+			return "energia1.png"
+		}else if (lionel.energia() < 20){
+			return "energia2.png"
+		}else if (lionel.energia() < 30){
+			return "energia3.png"
+		}else if (lionel.energia() < 40){
+			return "energia4.png"
+		}else{
+		return "energia5.png"
+		}
+	}
 }
 
 object visorPelotas inherits Visor {
 
 	override method position() {
-		return game.at(game.width() - 3, alturaDeVisores - 0.5)
+		return game.at(game.width() - 5, alturaDeVisores - 0.5)
 	}
 
 	method image() {
-		return "contador-pelota.png"
+		return "pelotaqatar2.png"
 	}
 
 	method text() {
@@ -306,8 +323,8 @@ object sonidos {
 }
 
 object menuPrincipal {
-	const volumen = 0.1
-	var musicaActiva = false
+	const volumen = 0.4
+	var property musicaActiva = false
 	var property juegoComenzado = false
 	var imagen = "menuPrincipal.png"
 	
@@ -360,9 +377,15 @@ object gameOver{
 	
 	method perder(){
 		programa.estado(finalizado)
+		game.schedule(1000,{self.manejarVisuales()})
+		musicaMenu.stop()
+		menuPrincipal.musicaActiva(false)
+	}
+	
+	method manejarVisuales(){
+		game.addVisual(self)
 		game.addVisualIn(puntajeFinal, game.at(10,0))
 		game.addVisualIn(mensajeReplay, game.at(10,game.height() - 1))
-		musicaMenu.stop()
 	}
 	
 	method volverAJugar(){

@@ -108,7 +108,6 @@ object lionel {
 		self.avisoDeMuerte()
 		self.cambiarAImagenDeMuerte()
 		sonidos.sonidosDeMuerte()
-		game.addVisual(gameOver)
 		maximoScore = maximoScore.max(score)
 		gameOver.perder()
 	}
