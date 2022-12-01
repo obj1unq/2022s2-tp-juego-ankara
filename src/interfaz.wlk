@@ -369,10 +369,10 @@ object gameOver{
 		menuPrincipal.juegoComenzado(false)
 		game.allVisuals().forEach({visual => game.removeVisual(visual)})
 		//restauro visuales
-		
 		game.addVisual(lionel)
 		menuPrincipal.comenzar()
 		lionel.energia(10)
+		lionel.cantidadDePelotas(10)
 		programa.estado(corriendo)
 	}
 	
