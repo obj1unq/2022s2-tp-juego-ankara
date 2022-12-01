@@ -10,6 +10,7 @@ object lionel {
 	var property cantidadDePelotas = 10
 	var property score = 0
 	var property maximoScore = 0
+	var puedePatear = true
 	const puntosPorPaso = 10
 	var recibioAtaque = false
 	var recibioConsumible = false
@@ -71,11 +72,17 @@ object lionel {
 	}
 
 	method patearPelota() {
-		if (cantidadDePelotas > 0) {
+		if (cantidadDePelotas > 0 and puedePatear) {
 			pelotas.agregarNuevo()
 			cantidadDePelotas -= 1
 			sonidos.sonidoPatearPelota()
+			self.esperarAPatear()
 		}
+	}
+	
+	method esperarAPatear(){
+		puedePatear = false
+		game.schedule(1000, { => puedePatear = true })
 	}
 
 	method colisionarConContrario(contrario) {
