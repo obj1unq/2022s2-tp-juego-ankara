@@ -270,27 +270,41 @@ object nivel4 inherits Nivel {
 }
 
 object sonidos {
-
+	var property activado= true
+	
 	method sonidoDeAtaqueRecibido() {
-		game.sound("nearmiss.mp3").play()
+		if(activado){
+			game.sound("nearmiss.mp3").play()
+		}
 	}
 
 	method sonidosDeMuerte() {
-		game.sound("silbato.mp3").play()
-		game.sound("no.mp3").play()
-		game.sound("hinchada1.mp3").play()
+		if(activado){
+			game.sound("silbato.mp3").play()
+			game.sound("no.mp3").play()
+			game.sound("hinchada1.mp3").play()
+		}
+		
 	}
 
 	method sonidoPatearPelota() {
-		game.sound("patada.mp3").play()
+		if(activado){
+			game.sound("patada.mp3").play()
+		}
+		
 	}
 
 	method sonidoDeRecarga() {
-		game.sound("recarga.mp3").play()
+		if(activado){
+			game.sound("recarga.mp3").play()
+		}
+		
 	}
 
 	method sonidoAumentoDeEnergia() {
-		game.sound("energia.mp3").play()
+		if(activado){
+			game.sound("energia.mp3").play()
+		}
 	}
 
 }
@@ -351,7 +365,7 @@ object menuPrincipal {
 }
 
 object gameOver {
-
+	var property sonidoActivado=true
 	method position() {
 		return game.origin()
 	}
@@ -363,8 +377,11 @@ object gameOver {
 	method perder() {
 		programa.estado(finalizado)
 		game.schedule(1000, { self.manejarVisuales()})
-		musicaMenu.stop()
-		menuPrincipal.musicaActiva(false)
+		if(sonidoActivado){
+			musicaMenu.stop()
+			menuPrincipal.musicaActiva(false)
+		}
+		
 	}
 
 	method manejarVisuales() {
