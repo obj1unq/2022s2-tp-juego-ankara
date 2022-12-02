@@ -83,8 +83,8 @@ describe "ankara " {
 		assert.equals(2, lionel.energia())
 		// defensorBrasilero colisiona con lionel
 		defensorBrasilero.colisioneCon(lionel)
-		// asegurarse que la vida de lionel es -18
-		assert.equals(-18, lionel.energia())
+		// asegurarse que la vida de lionel es 0
+		assert.equals(0, lionel.energia())
 	}
 
 	test"colision con una bolsa de pelotas" {
