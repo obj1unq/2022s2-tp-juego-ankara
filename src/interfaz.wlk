@@ -23,15 +23,11 @@ class Visor {
 object visorEnergia inherits Visor {
 
 	override method position() {
-		return game.at(1, alturaDeVisores)
+		return game.at(0.5, alturaDeVisores)
 	}
 
 	method image() {
 		return self.energiaDeMessi()
-	}
-
-	method text() {
-		return "Energía: " + lionel.energia()
 	}
 
 	method energiaDivididoDiez() {
@@ -51,7 +47,7 @@ object visorEnergia inherits Visor {
 object visorPelotas inherits Visor {
 
 	override method position() {
-		return game.at(game.width() - 5, alturaDeVisores - 0.5)
+		return game.at(2.5, alturaDeVisores - 0.5)
 	}
 
 	method image() {
@@ -67,7 +63,7 @@ object visorPelotas inherits Visor {
 object visorScore inherits Visor {
 
 	override method position() {
-		return game.at(5, alturaDeVisores)
+		return game.at(game.width() - 2, alturaDeVisores)
 	}
 
 	method text() {
@@ -157,8 +153,6 @@ object spawner {
 
 class Nivel {
 
-	method nombre()
-
 	method imagenBanderas()
 
 	method contrarios() {
@@ -189,10 +183,6 @@ object nivel0 inherits Nivel {
 	var ticksGuardados = 3
 	const ticksParaCrearAlgo = 3
 
-	override method nombre() {
-		return "1 - Alemania"
-	}
-
 	override method imagenBanderas() {
 		return "nivel1.png"
 	}
@@ -221,10 +211,6 @@ object nivel1 inherits Nivel {
 		return "nivel1.png"
 	}
 
-	override method nombre() {
-		return "1 - Alemania"
-	}
-
 	override method nivelSegunScore(score) {
 		return if (score < 1000) self else nivel2
 	}
@@ -235,10 +221,6 @@ object nivel2 inherits Nivel {
 
 	override method imagenBanderas() {
 		return "nivel2.png"
-	}
-
-	override method nombre() {
-		return "2 - Alemania y Brasil"
 	}
 
 	override method contrarios() {
@@ -257,10 +239,6 @@ object nivel3 inherits Nivel {
 		return "nivel3.png"
 	}
 
-	override method nombre() {
-		return "3 - Alemania, Brasil e Inglaterra"
-	}
-
 	override method contrarios() {
 		return nivel2.contrarios() + [ ingleses ]
 	}
@@ -275,10 +253,6 @@ object nivel4 inherits Nivel {
 
 	override method imagenBanderas() {
 		return "nivel3.png"
-	}
-
-	override method nombre() {
-		return "3 - Alemania, Brasil e Inglaterra"
 	}
 
 	override method contrarios() {
@@ -419,7 +393,7 @@ object gameOver {
 object puntajeFinal {
 
 	method text() {
-		return "Mejor Puntaje: " + lionel.maximoScore()
+		return "Tu puntaje fue: " + lionel.maximoScore()
 	}
 
 	method textColor() {
@@ -435,7 +409,7 @@ object puntajeFinal {
 object mensajeReplay {
 
 	method text() {
-		return "Apreta enter para volver a jugar "
+		return "Apreta 'enter' para volver a jugar "
 	}
 
 	method textColor() {
