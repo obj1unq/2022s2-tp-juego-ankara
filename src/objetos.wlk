@@ -10,7 +10,7 @@ object lionel {
 	var property cantidadDePelotas = 10
 	var property score = 0
 	var property maximoScore = 0
-	var puedePatear = true
+	var puedePatear = false
 	const puntosPorPaso = 10
 	var recibioAtaque = false
 	var recibioConsumible = false
@@ -19,8 +19,9 @@ object lionel {
 		return camiseta
 	}
 
-	method iniciar(){
+	method iniciar() {
 		camiseta = "lionel-titular.png"
+		puedePatear = true
 	}
 
 	// Movimiento
@@ -65,10 +66,10 @@ object lionel {
 	}
 
 	method unTick() {
-		if (not self.estaMuerto()){
+		if (not self.estaMuerto()) {
 			self.aumentarScore()
 		}
-		self.reseteoDeImagen()	
+		self.reseteoDeImagen()
 	}
 
 	method patearPelota() {
@@ -79,10 +80,10 @@ object lionel {
 			self.esperarAPatear()
 		}
 	}
-	
-	method esperarAPatear(){
+
+	method esperarAPatear() {
 		puedePatear = false
-		game.schedule(1000, { => puedePatear = true })
+		game.schedule(1000, { => puedePatear = true})
 	}
 
 	method colisionarConContrario(contrario) {
@@ -109,6 +110,7 @@ object lionel {
 		self.cambiarAImagenDeMuerte()
 		sonidos.sonidosDeMuerte()
 		maximoScore = maximoScore.max(score)
+		puedePatear = false
 		gameOver.perder()
 	}
 
