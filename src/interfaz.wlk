@@ -25,28 +25,27 @@ object visorEnergia inherits Visor {
 	override method position() {
 		return game.at(1, alturaDeVisores)
 	}
-	
-	method image(){return self.energiaDeMessi()}
+
+	method image() {
+		return self.energiaDeMessi()
+	}
 
 	method text() {
 		return "Energía: " + lionel.energia()
 	}
-	
-	method energiaDeMessi(){
-		if(lionel.energia() <= 0){
-			return "energia0.png"
-		}else if (lionel.energia() < 10){
-			return "energia1.png"
-		}else if (lionel.energia() < 20){
-			return "energia2.png"
-		}else if (lionel.energia() < 30){
-			return "energia3.png"
-		}else if (lionel.energia() < 40){
-			return "energia4.png"
-		}else{
-		return "energia5.png"
-		}
+
+	method energiaDivididoDiez() {
+		return lionel.energia().div(10)
 	}
+
+	method numeroDeImagen() {
+		return if (self.energiaDivididoDiez() < 0) 0 else if (self.energiaDivididoDiez() > 5) 5 else self.energiaDivididoDiez()
+	}
+
+	method energiaDeMessi() {
+		return "energia" + self.numeroDeImagen() + ".png"
+	}
+
 }
 
 object visorPelotas inherits Visor {
@@ -323,22 +322,27 @@ object sonidos {
 }
 
 object menuPrincipal {
+
 	const volumen = 0.4
 	var property musicaActiva = false
 	var property juegoComenzado = false
 	var imagen = "menuPrincipal.png"
-	
-	method position(){return game.origin()}
-	
-	method image(){ return imagen }
-	
-	method comenzar(){
+
+	method position() {
+		return game.origin()
+	}
+
+	method image() {
+		return imagen
+	}
+
+	method comenzar() {
 		imagen = "pngVacio.png"
 		self.inicializarJuego()
 	}
-	
-	method inicializarJuego(){
-		if(not juegoComenzado){
+
+	method inicializarJuego() {
+		if (not juegoComenzado) {
 			lionel.iniciar()
 			self.inicializarValores()
 			game.addVisual(pelotas)
@@ -350,117 +354,145 @@ object menuPrincipal {
 			juegoComenzado = true
 		}
 	}
-	
-	method inicializarValores(){
+
+	method inicializarValores() {
 		lionel.score(0)
-		//lionel.cantidadDePelotas(10)
+			// lionel.cantidadDePelotas(10)
 		spawner.nivel(nivel0)
 	}
-	
-	method unTick(){
-		//polimorfismo
+
+	method unTick() {
+		// polimorfismo
 		self.activarMusica()
 	}
-	
-	method activarMusica(){
-		if(not musicaActiva){
+
+	method activarMusica() {
+		if (not musicaActiva) {
 			musicaMenu.volume(volumen)
 			musicaMenu.play()
 			musicaActiva = true
 		}
 	}
+
 }
 
-object gameOver{
-	method position(){return game.origin()}
-	method image(){return "gameOver.png"}
-	
-	method perder(){
+object gameOver {
+
+	method position() {
+		return game.origin()
+	}
+
+	method image() {
+		return "gameOver.png"
+	}
+
+	method perder() {
 		programa.estado(finalizado)
-		game.schedule(1000,{self.manejarVisuales()})
+		game.schedule(1000, { self.manejarVisuales()})
 		musicaMenu.stop()
 		menuPrincipal.musicaActiva(false)
 	}
-	
-	method manejarVisuales(){
+
+	method manejarVisuales() {
 		game.addVisual(self)
-		game.addVisualIn(puntajeFinal, game.at(10,0))
-		game.addVisualIn(mensajeReplay, game.at(10,game.height() - 1))
+		game.addVisualIn(puntajeFinal, game.at(10, 0))
+		game.addVisualIn(mensajeReplay, game.at(10, game.height() - 1))
 	}
-	
-	method volverAJugar(){
+
+	method volverAJugar() {
 		menuPrincipal.juegoComenzado(false)
-		game.allVisuals().forEach({visual => game.removeVisual(visual)})
-		//restauro visuales
+		game.allVisuals().forEach({ visual => game.removeVisual(visual)})
+			// restauro visuales
 		game.addVisual(lionel)
 		menuPrincipal.comenzar()
 		lionel.energia(10)
 		lionel.cantidadDePelotas(10)
 		programa.estado(corriendo)
 	}
-	
-	method unTick(){
-		//polimorfismo
+
+	method unTick() {
+	// polimorfismo
 	}
+
 }
 
-object puntajeFinal{
-	method text(){return "Mejor Puntaje: " + lionel.maximoScore()}
-	method textColor() {return "FF0000"}
-	
-	method unTick(){
-		//polimorfismo
+object puntajeFinal {
+
+	method text() {
+		return "Mejor Puntaje: " + lionel.maximoScore()
 	}
+
+	method textColor() {
+		return "FF0000"
+	}
+
+	method unTick() {
+	// polimorfismo
+	}
+
 }
 
-object mensajeReplay{
-	method text(){return "Apreta enter para volver a jugar "}
-	method textColor() {return "FF0000"}
-	
-	method unTick(){
-		//polimorfismo
+object mensajeReplay {
+
+	method text() {
+		return "Apreta enter para volver a jugar "
 	}
+
+	method textColor() {
+		return "FF0000"
+	}
+
+	method unTick() {
+	// polimorfismo
+	}
+
 }
 
-object programa{
+object programa {
+
 	var property estado = inicio
-	
-	method onTick(){
+
+	method onTick() {
 		estado.onTick()
 	}
-	
-	method iniciar(){
+
+	method iniciar() {
 		estado.iniciar()
 	}
+
 }
 
-object inicio{
-	method iniciar(){
+object inicio {
+
+	method iniciar() {
 		menuPrincipal.comenzar()
 		programa.estado(corriendo)
 	}
-	
-	method onTick(){
-	
+
+	method onTick() {
 	}
+
 }
 
-object corriendo{
-	method iniciar(){
+object corriendo {
 
+	method iniciar() {
 	}
-	
-	method onTick(){
+
+	method onTick() {
 		game.allVisuals().forEach{ visual => visual.unTick()}
 	}
+
 }
 
-object finalizado{
-	method iniciar(){
+object finalizado {
+
+	method iniciar() {
 		gameOver.volverAJugar()
 	}
-	
-	method onTick(){
-		
+
+	method onTick() {
 	}
+
 }
+
