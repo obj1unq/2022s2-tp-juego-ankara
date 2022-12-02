@@ -8,13 +8,13 @@ import consumibles.*
 describe "ankara " {
 
 	// defensor ingles con ataque 3 en la posicion 4,2
-	const defensorIngles = new JugadorIngles(position = game.at(4, 2), ataque = 3)
+	const defensorIngles = new JugadorIngles(position = game.at(4, 2))
 	// defensor brasilero con ataque 20 en la posicion 3,2
-	const defensorBrasilero = new JugadorBrasilero(position = game.at(3, 2), ataque = 20)
+	const defensorBrasilero = new JugadorBrasilero(position = game.at(3, 2))
 	// defensor aleman con ataque 5 en la posicion 4,4
-	const defensorAleman = new JugadorAleman(position = game.at(4, 4), ataque = 5)
+	const defensorAleman = new JugadorAleman(position = game.at(4, 4))
 	// mediocampista aleman con ataque 5 en la posicion -10,2
-	const mediocampistaAleman = new JugadorAleman(position = game.at(-10, 2), ataque = 5)
+	const mediocampistaAleman = new JugadorAleman(position = game.at(-10, 2))
 	// una pelota
 	const pelota = new Pelota(position = game.at(0, 2))
 	const bolsaDePelotas = new BolsaDePelotas(position = game.at(0, 0))
