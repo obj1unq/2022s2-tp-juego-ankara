@@ -11,11 +11,11 @@ class Jugador {
 	method unTick() {
 		self.avanzar()	
 	}
-
+	
 	method dentroDelTablero() {
 		return position.x() > 0
 	}
-
+	
 	method avanzar() {
 		if (self.dentroDelTablero()) {
 			self.accionEspecial()
@@ -38,6 +38,10 @@ class Jugador {
 	}
 
 	method accionEspecial()
+	
+	method colisionarConConsumible(consumible){
+		//no hace nada polimorfismo
+	}
 
 }
 
