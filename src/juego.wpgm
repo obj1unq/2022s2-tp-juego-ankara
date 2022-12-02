@@ -1,8 +1,36 @@
 import wollok.game.*
-import pepita.*
+import objetos.*
+import contrarios.*
+import consumibles.*
+import interfaz.*
 
-program juego {
-	game.title("Juego Base")
-	game.addVisual(pepita)
+program futbolito{
+	
+	game.cellSize(50)
+	game.width(20)
+	game.height(6)
+	game.boardGround("fondo.jpg")
+	
+	// Movimientos de Lionel
+
+	game.addVisual(lionel)
+	keyboard.up().onPressDo({ lionel.subir() })
+	keyboard.down().onPressDo({ lionel.bajar() })
+	keyboard.p().onPressDo({ lionel.patearPelota() })
+	
+	//menu 
+	
+	
+	game.addVisual(menuPrincipal)
+	keyboard.enter().onPressDo({ programa.iniciar()})
+	
+	
+	
+	// Colliders
+	game.onCollideDo(lionel, { cosa => cosa.colisioneCon(lionel) })
+
+	// On ticks
+	game.onTick(conf.velocidad(), "un_tick", { programa.onTick() })	
+	
 	game.start()
 }
