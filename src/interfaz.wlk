@@ -3,8 +3,6 @@ import objetos.*
 import contrarios.*
 import consumibles.*
 
-
-
 class Visor {
 
 	const alturaDeVisores = game.height() - 0.5
@@ -345,7 +343,6 @@ object menuPrincipal {
 
 	method inicializarValores() {
 		lionel.score(0)
-			// lionel.cantidadDePelotas(10)
 		spawner.nivel(nivel0)
 	}
 
@@ -399,7 +396,7 @@ object gameOver {
 		game.addVisual(lionel)
 		menuPrincipal.comenzar()
 		lionel.energia(10)
-		lionel.cantidadDePelotas(10)
+		lionel.cantidadDePelotas(5)
 		programa.estado(corriendo)
 	}
 
