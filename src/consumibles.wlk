@@ -86,10 +86,6 @@ class BolsaDePelotas inherits Consumible(image = "bolsaPelotas.png") {
 	override method afectarA(personaje) {
 		personaje.aumentarPelotas(cantidad)
 	}
-	
-	override method colisioneCon(elemento){
-		super(elemento)
-	}
 
 }
 
