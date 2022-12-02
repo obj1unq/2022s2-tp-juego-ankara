@@ -1,6 +1,8 @@
 import contrarios.*
 import wollok.game.*
 import objetos.*
+import interfaz.*
+import consumibles.*
 
 //los jugadores contrarios no se encuentran en movimiento
 describe "ankara "{
@@ -15,12 +17,17 @@ describe "ankara "{
 	
 	// una pelota
 	const pelota = new Pelota(position= game.at(0,2))
+	const bolsaDePelotas = new BolsaDePelotas(position =game.at(0,0))
+	const gatorade = new Gatorade(position = game.at(0,0))
 	method initialize() {
 		game.addVisual(defensorIngles)
 		game.addVisual(defensorBrasilero)
 		game.addVisual(defensorAleman)
 		game.addVisual(mediocampistaAleman)
 		game.addVisual(lionel)
+		game.addVisual(bolsaDePelotas)
+		game.addVisual(pelota)
+		
 	}
 	test "los jugadores contrarios se encuentran en el juego"{
 		// asegurarse que defensorIngles se encuentra en el juego
@@ -62,25 +69,73 @@ describe "ankara "{
 		assert.equals(game.at(2,2), defensorIngles.position())
 	}
 //	test "colisiona con lionel"{
-//		 defensorIngles colisiona con lionel 
 //		
-//		defensorAleman colisiona con lionel
-//		
-//		defensorIngles colisiona con lionel
-//		
+//		//defensorIngles colisiona con lionel  
+//		defensorIngles.colisioneCon(lionel)
+//		//asegurarse que la vida de lionel es 7
+//		assert.equals(7,lionel.energia())
+//		//defensorAleman colisiona con lionel
+//		defensorAleman.colisioneCon(lionel)
+//		//asegurarse que la vida de lionel es 2
+//		assert.equals(2,lionel.energia())
+//		//defensorBrasilero colisiona con lionel
+//		defensorBrasilero.colisioneCon(lionel)
+//		//asegurarse que la vida de lionel es -18
+//		assert.equals(-18,lionel.energia())
 //	}
-//	test "colisiona con pelota"{
-//		
-//	}
+
 	
-//	test" colisiona con una bolsa"{
-//		
-//	}
-//	test "colisiona con un consumible"{
-//		
-//	}
-//	test "la pelota se encuentra justo delante"{
-//		
+	test"colision con una bolsa de pelotas"{
+		//este test es para asegurarse que no sucede nada cuando un enemigo y una bolsa de pelotas colisionan
+		//defensorIngles colisiona con una bolsa de pelotas
+		defensorIngles.colisionarConConsumible(bolsaDePelotas)
+		assert.that(game.hasVisual(defensorIngles))
+		// defensorAleman colisiona con una bolsa de pelotas
+		defensorAleman.colisionarConConsumible(bolsaDePelotas)
+		assert.that(game.hasVisual(defensorAleman))
+		// defensorBrasilero colisiona con una bolsa de pelotas
+		defensorBrasilero.colisionarConConsumible(bolsaDePelotas)
+		assert.that(game.hasVisual(defensorBrasilero))
+	}
+	test "colision con gatorade"{
+		// defensorIngles colisiona con gatorade
+		defensorIngles.colisionarConConsumible(gatorade)
+		assert.that(game.hasVisual(defensorIngles))
+		// defensorAleman colisiona con gatorade
+		defensorAleman.colisionarConConsumible(gatorade)
+		assert.that(game.hasVisual(defensorAleman))
+		// defensorBrasilero colisiona con gatorade
+		defensorBrasilero.colisionarConConsumible(gatorade)
+		assert.that(game.hasVisual(defensorBrasilero))
+	}
+	test "colision con otro contrario"{
+		// defensorAleman colisiona con defensorIngles
+		defensorAleman.colisionarConContrario(defensorIngles)
+		// defensorIngles colisiona con defensorBrasilero
+		defensorIngles.colisionarConContrario(defensorBrasilero)
+		//defensorAleman colisiona con defensorBrasilero
+		defensorAleman.colisionarConContrario(defensorBrasilero)
+		
+		//los 3 defensores siguen teniendo componente visual
+		assert.that(game.hasVisual(defensorBrasilero))
+		assert.that(game.hasVisual(defensorAleman))
+		assert.that(game.hasVisual(defensorIngles))
+	}
+	
+
+//	test "colision con una pelota"{
+//		// defensorAleman colisiona con una pelota
+//		defensorAleman.colisioneCon(pelota)
+//		// defensorBrasilero colisiona con una pelota
+//		defensorBrasilero.colisioneCon(pelota)
+//		// defensorIngles Colisiona con una pelota 
+//		defensorIngles.colisioneCon(pelota)
+//		//verificar que el defensorAleman ya no se encuentra en el tablero.
+//		assert.notThat(game.hasVisual(defensorAleman))
+//		//verificar que el defensorBrasilero ya no se encuentra en el tablero.
+//		assert.notThat(game.hasVisual(defensorBrasilero))
+//		//verificar que el defensorIngles ya no se encuentra en el tablero.
+//		assert.notThat(game.hasVisual(defensorIngles))
 //	}
 }
 
