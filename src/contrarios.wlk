@@ -4,18 +4,22 @@ import interfaz.*
 
 class Jugador {
 
-	var property image = null
 	var property position = null
-	const property ataque = null
+
+	method image()
+
+	method ataque() {
+		return 3
+	}
 
 	method unTick() {
-		self.avanzar()	
+		self.avanzar()
 	}
-	
+
 	method dentroDelTablero() {
 		return position.x() > 0
 	}
-	
+
 	method avanzar() {
 		if (self.dentroDelTablero()) {
 			self.accionEspecial()
@@ -24,9 +28,9 @@ class Jugador {
 			self.serEliminado()
 		}
 	}
-	
-	method colisionarConContrario(contrario){
-		//Polimorfismo
+
+	method colisionarConContrario(contrario) {
+	// Polimorfismo
 	}
 
 	method colisioneCon(elemento) {
@@ -38,42 +42,46 @@ class Jugador {
 	}
 
 	method accionEspecial()
-	
-	method colisionarConConsumible(consumible){
-		//no hace nada polimorfismo
+
+	method colisionarConConsumible(consumible) {
+	// no hace nada polimorfismo
 	}
 
 }
 
 //Ingleses
-class JugadorIngles inherits Jugador(image = "ingles.png", ataque = 3) {
+class JugadorIngles inherits Jugador {
+
 	var property debeSubir = false
-	
+
+	override method image() {
+		return "ingles.png"
+	}
+
 	override method accionEspecial() {
-		if (debeSubir){
-			self.subir()	
-		}
-		else{
+		if (debeSubir) {
+			self.subir()
+		} else {
 			self.bajar()
 		}
 		debeSubir = !debeSubir
 	}
-	
-	
-	method subir(){
+
+	method subir() {
 		position = position.up(1)
-		// No le agrego ninguna validación porque siempre empieza bajando
+	// No le agrego ninguna validación porque siempre empieza bajando
 	}
-	
-	method bajar(){
-		if (position.y() == 0){
+
+	method bajar() {
+		if (position.y() == 0) {
 			debeSubir = !debeSubir
 			self.accionEspecial()
 			debeSubir = !debeSubir
-		} else{
-			position = position.down(1)	
+		} else {
+			position = position.down(1)
 		}
 	}
+
 }
 
 object ingleses inherits Factory {
@@ -81,13 +89,23 @@ object ingleses inherits Factory {
 	override method nuevo() {
 		return new JugadorIngles()
 	}
+
 }
 
 //Alemanes
-class JugadorAleman inherits Jugador(image = "aleman.png", ataque = 5) {
+class JugadorAleman inherits Jugador {
+
+	override method image() {
+		return "aleman.png"
+	}
+
+	override method ataque() {
+		return 5
+	}
 
 	override method accionEspecial() {
 	}
+
 }
 
 object alemanes inherits Factory {
@@ -95,12 +113,18 @@ object alemanes inherits Factory {
 	override method nuevo() {
 		return new JugadorAleman()
 	}
+
 }
 
 //Brazucas
-class JugadorBrasilero inherits Jugador(image = "brasilero.png", ataque = 20) {
+class JugadorBrasilero inherits JugadorAleman {
 
-	override method accionEspecial() {
+	override method image() {
+		return "brasilero.png"
+	}
+
+	override method ataque() {
+		return 20
 	}
 
 }
@@ -112,5 +136,4 @@ object brasileros inherits Factory {
 	}
 
 }
-
 

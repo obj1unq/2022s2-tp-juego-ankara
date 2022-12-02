@@ -7,9 +7,8 @@ object lionel {
 	var property camiseta = "pngVacio.png"
 	var property position = game.at(2, 2)
 	var property energia = 10
-	var property cantidadDePelotas = 10
+	var property cantidadDePelotas = 5
 	var property score = 0
-	var property maximoScore = 0
 	var puedePatear = false
 	const puntosPorPaso = 10
 	var recibioAtaque = false
@@ -48,7 +47,7 @@ object lionel {
 		spawner.pasarDeNivelSiCorresponde(score)
 	}
 
-	method cambioDeImagenPorContrario() {
+	method cambioDeImagenPorAtaque() {
 		camiseta = "lionel-golpeado.png"
 	}
 
@@ -66,9 +65,10 @@ object lionel {
 	}
 
 	method unTick() {
-		if (not self.estaMuerto()) {
-			self.aumentarScore()
+		if (self.estaMuerto()) {
+			self.morir()
 		}
+		self.aumentarScore()
 		self.reseteoDeImagen()
 	}
 
@@ -86,15 +86,15 @@ object lionel {
 		game.schedule(1000, { => puedePatear = true})
 	}
 
-	method colisionarConContrario(contrario) {
-		self.cambioDeImagenPorContrario()
+	method recibirAtaque(contrario) {
 		recibioAtaque = true
-		energia -= contrario.ataque()
+		if (contrario.ataque() <= energia) energia -= contrario.ataque() else energia = 0
 		sonidos.sonidoDeAtaqueRecibido()
-		if (self.estaMuerto()) {
-			self.morir()
-			contrario.serEliminado()
-		}
+	}
+
+	method colisionarConContrario(contrario) {
+		self.cambioDeImagenPorAtaque()
+		self.recibirAtaque(contrario)
 	}
 
 	method avisoDeMuerte() {
@@ -105,11 +105,11 @@ object lionel {
 		camiseta = "lionel-muerto.png"
 	}
 
+
 	method morir() {
 		self.avisoDeMuerte()
 		self.cambiarAImagenDeMuerte()
 		sonidos.sonidosDeMuerte()
-		maximoScore = maximoScore.max(score)
 		puedePatear = false
 		gameOver.perder()
 	}

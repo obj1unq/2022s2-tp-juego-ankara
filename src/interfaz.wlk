@@ -3,8 +3,6 @@ import objetos.*
 import contrarios.*
 import consumibles.*
 
-const musicaMenu = game.sound("musicaMenu.mp3")
-
 class Visor {
 
 	const alturaDeVisores = game.height() - 0.5
@@ -51,7 +49,7 @@ object visorPelotas inherits Visor {
 	}
 
 	method image() {
-		return "pelotaqatar2.png"
+		return "contador-pelota.png"
 	}
 
 	method text() {
@@ -270,39 +268,38 @@ object nivel4 inherits Nivel {
 }
 
 object sonidos {
-	var property activado= true
-	
+
+	var property activado = true
+	const property musica = game.sound("musica.mp3")
+
 	method sonidoDeAtaqueRecibido() {
-		if(activado){
+		if (activado) {
 			game.sound("nearmiss.mp3").play()
 		}
 	}
 
 	method sonidosDeMuerte() {
-		if(activado){
+		if (activado) {
 			game.sound("silbato.mp3").play()
 			game.sound("no.mp3").play()
 			game.sound("hinchada1.mp3").play()
 		}
-		
 	}
 
 	method sonidoPatearPelota() {
-		if(activado){
+		if (activado) {
 			game.sound("patada.mp3").play()
 		}
-		
 	}
 
 	method sonidoDeRecarga() {
-		if(activado){
+		if (activado) {
 			game.sound("recarga.mp3").play()
 		}
-		
 	}
 
 	method sonidoAumentoDeEnergia() {
-		if(activado){
+		if (activado) {
 			game.sound("energia.mp3").play()
 		}
 	}
@@ -340,24 +337,30 @@ object menuPrincipal {
 			game.addVisual(visorNivel)
 			game.addVisual(spawner)
 			juegoComenzado = true
+			self.activarMusica()
 		}
 	}
 
 	method inicializarValores() {
 		lionel.score(0)
-			// lionel.cantidadDePelotas(10)
 		spawner.nivel(nivel0)
 	}
 
 	method unTick() {
-		// polimorfismo
-		self.activarMusica()
+	}
+
+	method encenderMusica() {
+		sonidos.musica().play()
+	}
+
+	method desactivarMusica() {
+		musicaActiva = false
+		sonidos.musica().volume(0)
 	}
 
 	method activarMusica() {
 		if (not musicaActiva) {
-			musicaMenu.volume(volumen)
-			musicaMenu.play()
+			sonidos.musica().volume(volumen)
 			musicaActiva = true
 		}
 	}
@@ -365,7 +368,7 @@ object menuPrincipal {
 }
 
 object gameOver {
-	var property sonidoActivado=true
+
 	method position() {
 		return game.origin()
 	}
@@ -375,13 +378,9 @@ object gameOver {
 	}
 
 	method perder() {
+		menuPrincipal.desactivarMusica()
 		programa.estado(finalizado)
 		game.schedule(1000, { self.manejarVisuales()})
-		if(sonidoActivado){
-			musicaMenu.stop()
-			menuPrincipal.musicaActiva(false)
-		}
-		
 	}
 
 	method manejarVisuales() {
@@ -397,7 +396,7 @@ object gameOver {
 		game.addVisual(lionel)
 		menuPrincipal.comenzar()
 		lionel.energia(10)
-		lionel.cantidadDePelotas(10)
+		lionel.cantidadDePelotas(5)
 		programa.estado(corriendo)
 	}
 
@@ -410,7 +409,7 @@ object gameOver {
 object puntajeFinal {
 
 	method text() {
-		return "Tu puntaje fue: " + lionel.maximoScore()
+		return "Tu puntaje fue: " + lionel.score()
 	}
 
 	method textColor() {
@@ -457,6 +456,7 @@ object inicio {
 
 	method iniciar() {
 		menuPrincipal.comenzar()
+		menuPrincipal.encenderMusica()
 		programa.estado(corriendo)
 	}
 
