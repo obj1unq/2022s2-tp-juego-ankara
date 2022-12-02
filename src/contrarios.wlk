@@ -117,7 +117,7 @@ object alemanes inherits Factory {
 }
 
 //Brazucas
-class JugadorBrasilero inherits Jugador {
+class JugadorBrasilero inherits JugadorAleman {
 
 	override method image() {
 		return "brasilero.png"
@@ -125,9 +125,6 @@ class JugadorBrasilero inherits Jugador {
 
 	override method ataque() {
 		return 20
-	}
-
-	override method accionEspecial() {
 	}
 
 }
