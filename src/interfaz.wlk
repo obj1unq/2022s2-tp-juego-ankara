@@ -3,7 +3,7 @@ import objetos.*
 import contrarios.*
 import consumibles.*
 
-const musicaMenu = game.sound("musicaMenu.mp3")
+
 
 class Visor {
 
@@ -272,6 +272,7 @@ object nivel4 inherits Nivel {
 object sonidos {
 
 	var property activado = true
+	const property musica = game.sound("musica.mp3")
 
 	method sonidoDeAtaqueRecibido() {
 		if (activado) {
@@ -352,17 +353,17 @@ object menuPrincipal {
 	}
 
 	method encenderMusica() {
-		musicaMenu.play()
+		sonidos.musica().play()
 	}
 
 	method desactivarMusica() {
 		musicaActiva = false
-		musicaMenu.volume(0)
+		sonidos.musica().volume(0)
 	}
 
 	method activarMusica() {
 		if (not musicaActiva) {
-			musicaMenu.volume(volumen)
+			sonidos.musica().volume(volumen)
 			musicaActiva = true
 		}
 	}
