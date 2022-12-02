@@ -51,7 +51,7 @@ object visorPelotas inherits Visor {
 	}
 
 	method image() {
-		return "pelotaqatar2.png"
+		return "contador-pelota.png"
 	}
 
 	method text() {
@@ -270,39 +270,37 @@ object nivel4 inherits Nivel {
 }
 
 object sonidos {
-	var property activado= true
-	
+
+	var property activado = true
+
 	method sonidoDeAtaqueRecibido() {
-		if(activado){
+		if (activado) {
 			game.sound("nearmiss.mp3").play()
 		}
 	}
 
 	method sonidosDeMuerte() {
-		if(activado){
+		if (activado) {
 			game.sound("silbato.mp3").play()
 			game.sound("no.mp3").play()
 			game.sound("hinchada1.mp3").play()
 		}
-		
 	}
 
 	method sonidoPatearPelota() {
-		if(activado){
+		if (activado) {
 			game.sound("patada.mp3").play()
 		}
-		
 	}
 
 	method sonidoDeRecarga() {
-		if(activado){
+		if (activado) {
 			game.sound("recarga.mp3").play()
 		}
-		
 	}
 
 	method sonidoAumentoDeEnergia() {
-		if(activado){
+		if (activado) {
 			game.sound("energia.mp3").play()
 		}
 	}
@@ -340,6 +338,7 @@ object menuPrincipal {
 			game.addVisual(visorNivel)
 			game.addVisual(spawner)
 			juegoComenzado = true
+			self.activarMusica()
 		}
 	}
 
@@ -350,14 +349,20 @@ object menuPrincipal {
 	}
 
 	method unTick() {
-		// polimorfismo
-		self.activarMusica()
+	}
+
+	method encenderMusica() {
+		musicaMenu.play()
+	}
+
+	method desactivarMusica() {
+		musicaActiva = false
+		musicaMenu.volume(0)
 	}
 
 	method activarMusica() {
 		if (not musicaActiva) {
 			musicaMenu.volume(volumen)
-			musicaMenu.play()
 			musicaActiva = true
 		}
 	}
@@ -365,7 +370,7 @@ object menuPrincipal {
 }
 
 object gameOver {
-	var property sonidoActivado=true
+
 	method position() {
 		return game.origin()
 	}
@@ -375,13 +380,9 @@ object gameOver {
 	}
 
 	method perder() {
+		menuPrincipal.desactivarMusica()
 		programa.estado(finalizado)
 		game.schedule(1000, { self.manejarVisuales()})
-		if(sonidoActivado){
-			musicaMenu.stop()
-			menuPrincipal.musicaActiva(false)
-		}
-		
 	}
 
 	method manejarVisuales() {
@@ -410,7 +411,7 @@ object gameOver {
 object puntajeFinal {
 
 	method text() {
-		return "Tu puntaje fue: " + lionel.maximoScore()
+		return "Tu puntaje fue: " + lionel.score()
 	}
 
 	method textColor() {
@@ -457,6 +458,7 @@ object inicio {
 
 	method iniciar() {
 		menuPrincipal.comenzar()
+		menuPrincipal.encenderMusica()
 		programa.estado(corriendo)
 	}
 
