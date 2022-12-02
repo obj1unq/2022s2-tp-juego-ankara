@@ -6,6 +6,7 @@ import consumibles.*
 
 //los jugadores contrarios no se encuentran en movimiento
 describe "ankara "{
+	
 	//defensor ingles con ataque 3 en la posicion 4,2
 	const defensorIngles = new JugadorIngles(position= game.at(4,2), ataque= 3)
 	//defensor brasilero con ataque 20 en la posicion 3,2
@@ -20,6 +21,8 @@ describe "ankara "{
 	const bolsaDePelotas = new BolsaDePelotas(position =game.at(0,0))
 	const gatorade = new Gatorade(position = game.at(0,0))
 	method initialize() {
+		sonidos.activado(false)
+		gameOver.sonidoActivado(false)
 		game.addVisual(defensorIngles)
 		game.addVisual(defensorBrasilero)
 		game.addVisual(defensorAleman)
@@ -68,21 +71,21 @@ describe "ankara "{
 		//asegurarse que la posicion de defensorIngles es x=2 e Y=2 (porque baja y luego sube)
 		assert.equals(game.at(2,2), defensorIngles.position())
 	}
-//	test "colisiona con lionel"{
-//		
-//		//defensorIngles colisiona con lionel  
-//		defensorIngles.colisioneCon(lionel)
-//		//asegurarse que la vida de lionel es 7
-//		assert.equals(7,lionel.energia())
-//		//defensorAleman colisiona con lionel
-//		defensorAleman.colisioneCon(lionel)
-//		//asegurarse que la vida de lionel es 2
-//		assert.equals(2,lionel.energia())
-//		//defensorBrasilero colisiona con lionel
-//		defensorBrasilero.colisioneCon(lionel)
-//		//asegurarse que la vida de lionel es -18
-//		assert.equals(-18,lionel.energia())
-//	}
+	test "colisiona con lionel"{
+		
+		//defensorIngles colisiona con lionel  
+		defensorIngles.colisioneCon(lionel)
+		//asegurarse que la vida de lionel es 7
+		assert.equals(7,lionel.energia())
+		//defensorAleman colisiona con lionel
+		defensorAleman.colisioneCon(lionel)
+		//asegurarse que la vida de lionel es 2
+		assert.equals(2,lionel.energia())
+		//defensorBrasilero colisiona con lionel
+		defensorBrasilero.colisioneCon(lionel)
+		//asegurarse que la vida de lionel es -18
+		assert.equals(-18,lionel.energia())
+	}
 
 	
 	test"colision con una bolsa de pelotas"{
@@ -124,6 +127,7 @@ describe "ankara "{
 	
 
 //	test "colision con una pelota"{
+//		
 //		// defensorAleman colisiona con una pelota
 //		defensorAleman.colisioneCon(pelota)
 //		// defensorBrasilero colisiona con una pelota
@@ -137,5 +141,5 @@ describe "ankara "{
 //		//verificar que el defensorIngles ya no se encuentra en el tablero.
 //		assert.notThat(game.hasVisual(defensorIngles))
 //	}
-}
-
+}	
+	
