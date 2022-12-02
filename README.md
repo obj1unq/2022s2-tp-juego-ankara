@@ -9,7 +9,10 @@
 
 ## Capturas
 
-(agregar)
+![menuPrincipal](https://user-images.githubusercontent.com/90214806/205378790-246033d1-0489-4156-a395-bb42bee52c13.png)
+
+![image](https://user-images.githubusercontent.com/90214806/205379369-8f3ca26a-96e7-4394-9178-e9f4a0544c6c.png)
+
 
 ## Reglas de Juego / Instrucciones
 
