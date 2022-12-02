@@ -71,6 +71,16 @@ describe "ankara " {
 		// asegurarse que la posicion de defensorIngles es x=2 e Y=2 (porque baja y luego sube)
 		assert.equals(game.at(2, 2), defensorIngles.position())
 	}
+	test"ataque de los contrarios"{
+		//asegurarse que el ataque de defensorIngles es 3
+		assert.equals(3, defensorIngles.ataque())
+		//asegurarse que el ataque de defensorBrasilero es 20
+		assert.equals(20, defensorBrasilero.ataque())
+		//asegurarse que el ataque de defensorAleman es 5
+		assert.equals(5, defensorAleman.ataque())
+		//asegurarse que el ataque de mediocampistaAleman es 5
+		assert.equals(5, mediocampistaAleman.ataque())
+	}
 
 	test "colisiona con lionel" {
 		// defensorIngles colisiona con lionel  
